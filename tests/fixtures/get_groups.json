@@ -1,0 +1,352 @@
+[
+  {
+    "id": 1,
+    "name": "Has AV protection on (any)",
+    "description": "Devices with any antivirus protection on.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": 1,
+    "lastEvaluated": 1787742852.392
+  },
+  {
+    "id": 2,
+    "name": "Has Webroot on",
+    "description": "Devices with Webroot installed and on, could be managed by NinjaOne or not.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 3,
+    "name": "Has Bitdefender (SDK/GravityZone) on",
+    "description": "Devices with Bitdefender installed and on, could be managed by NinjaOne or not.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 4,
+    "name": "Has Vipre on",
+    "description": "Devices with Vipre installed and on, could be managed by NinjaOne or not.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 5,
+    "name": "Has another security vendor on",
+    "description": "Devices with any other antivirus on. Excluding Vipre, Webroot and Bitdefender.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 6,
+    "name": "Has AV managed by NinjaOne",
+    "description": "Devices with any AV installed and managed by NinjaOne.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 7,
+    "name": "Has Webroot managed by NinjaOne",
+    "description": "Devices with Webroot installed and managed by NinjaOne.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 8,
+    "name": "Has Bitdefender SDK managed by NinjaOne",
+    "description": "Devices with Bitdefender installed and managed by NinjaOne.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 9,
+    "name": "Has Vipre managed by NinjaOne",
+    "description": "Devices with Vipre installed and managed by NinjaOne.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 10,
+    "name": "Has OS patching enabled",
+    "description": "Devices with os patching enabled in policies. Includes inheritance and overrides.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 11,
+    "name": "Has Third Party patching enabled",
+    "description": "Devices with software patching enabled in policies. Includes inheritance and overrides.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 12,
+    "name": "Has Adobe patching enabled",
+    "description": "Devices with software patching enabled in policies. Also, any Adobe System product configured. Includes inheritance and overrides.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 13,
+    "name": "Has Java patching enabled",
+    "description": "Devices with software patching enabled in policies. Also, any Java product from Oracle configured. Includes inheritance and overrides.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 14,
+    "name": "Has Exchange patching enabled",
+    "description": "Devices with software patching enabled in policies. Also, any Exchange Server product from MS Corporation configured. Includes inheritance and overrides.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 15,
+    "name": "Has SQL Server patching enabled",
+    "description": "Devices with software patching enabled in policies. Also, any SQL Server product from MS Corporation configured. Includes inheritance and overrides.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 16,
+    "name": "Has remote access",
+    "description": "Devices with any remote access enabled / synced.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 17,
+    "name": "Has RDP access",
+    "description": "All Windows Devices when RDP feature is enabled on division.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 18,
+    "name": "Has Splashtop access active",
+    "description": "Devices with Splashtop installed, enabled and managed by NinjaOne.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 19,
+    "name": "Is Dell device",
+    "description": "Devices manufactured by Dell.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 20,
+    "name": "Is IBM device",
+    "description": "Devices manufactured by IBM.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 21,
+    "name": "Is HP device",
+    "description": "Devices manufactured by Hewlett-Packard.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 22,
+    "name": "MS Office installed",
+    "description": "Devices with Microsoft Office installed.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 23,
+    "name": "MS SQL Server installed",
+    "description": "Devices with Microsoft SQL Server installed.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 24,
+    "name": "MS Exchange installed",
+    "description": "Devices with Microsoft Exchange installed.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 25,
+    "name": "Is scheduled task target",
+    "description": "All Devices that are being targeted by enabled scheduled tasks. Directly or indirectly through organization or group.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 26,
+    "name": "Is Primary Domain Controller",
+    "description": "Devices with Primary Domain Controller as domain role.",
+    "shared": true,
+    "created": 1739886603.109312,
+    "updated": 1739886603.109312,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 27,
+    "name": "Doesn't have AV protection on (any)",
+    "description": "Devices without any antivirus protection.",
+    "shared": true,
+    "created": 1739886605.958957,
+    "updated": 1739886605.958957,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 28,
+    "name": "Doesn't have AV managed by NinjaOne",
+    "description": "Devices without any AV installed and managed by NinjaOne.",
+    "shared": true,
+    "created": 1739886605.958957,
+    "updated": 1739886605.958957,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 29,
+    "name": "Has TeamViewer access",
+    "description": "Devices with TeamViewer installed.",
+    "shared": true,
+    "created": 1739886607.280159,
+    "updated": 1739886607.280159,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 30,
+    "name": "Has GravityZone managed by NinjaOne",
+    "description": "Devices with GravityZone and managed by NinjaOne.",
+    "shared": true,
+    "created": 1739886607.541158,
+    "updated": 1739886607.541158,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 31,
+    "name": "Has GravityZone not managed by NinjaOne",
+    "description": "Devices with GravityZone, but not managed by NinjaOne.",
+    "shared": true,
+    "created": 1739886607.541158,
+    "updated": 1739886607.541158,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 32,
+    "name": "Has SentinelOne on",
+    "description": "Devices with SentinelOne installed and on, could be managed by NinjaOne or not.",
+    "shared": true,
+    "created": 1740539275.756087,
+    "updated": 1740539275.756087,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 33,
+    "name": "Has SentinelOne managed by NinjaOne",
+    "description": "Devices with SentinelOne installed and managed by NinjaOne.",
+    "shared": true,
+    "created": 1740539275.756087,
+    "updated": 1740539275.756087,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 34,
+    "name": "Has CrowdStrike on",
+    "description": "Devices with CrowdStrike installed and on, could be managed by NinjaOne or not.",
+    "shared": true,
+    "created": 1749000085.104613,
+    "updated": 1749000085.104613,
+    "deviceCount": null,
+    "lastEvaluated": null
+  },
+  {
+    "id": 35,
+    "name": "Has CrowdStrike managed by NinjaOne",
+    "description": "Devices with CrowdStrike installed and managed by NinjaOne.",
+    "shared": true,
+    "created": 1749000085.104613,
+    "updated": 1749000085.104613,
+    "deviceCount": null,
+    "lastEvaluated": null
+  }
+]

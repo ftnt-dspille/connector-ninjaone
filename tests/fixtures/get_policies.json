@@ -1,0 +1,274 @@
+[
+  {
+    "id": 1,
+    "name": "Windows Server Policy",
+    "description": "Default Windows Server Policy",
+    "nodeClass": "WINDOWS_SERVER",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 2,
+    "name": "Windows Workstation Policy",
+    "description": "Default Windows Workstation Policy",
+    "nodeClass": "WINDOWS_WORKSTATION",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 3,
+    "name": "Linux Policy",
+    "description": "Default Linux Policy",
+    "nodeClass": "LINUX_WORKSTATION",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 4,
+    "name": "Mac Policy",
+    "description": "Default Mac Policy",
+    "nodeClass": "MAC",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 5,
+    "name": "VMWare Host Policy",
+    "description": "VMWare Host Policy",
+    "nodeClass": "VMWARE_VM_HOST",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 6,
+    "name": "VMWare Guest VM Policy",
+    "description": "VMWare Guest VM Policy",
+    "nodeClass": "VMWARE_VM_GUEST",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 7,
+    "name": "NMS - Switch Policy",
+    "description": "NMS - Switch Policy",
+    "nodeClass": "NMS_SWITCH",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 8,
+    "name": "NMS - Router Policy",
+    "description": "NMS - Router Policy",
+    "nodeClass": "NMS_ROUTER",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 9,
+    "name": "NMS - Firewall Policy",
+    "description": "NMS - Firewall Policy",
+    "nodeClass": "NMS_FIREWALL",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 10,
+    "name": "NMS - Private Network Gateway Policy",
+    "description": "NMS - Private Network Gateway Policy",
+    "nodeClass": "NMS_PRIVATE_NETWORK_GATEWAY",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 11,
+    "name": "NMS - Printer Policy",
+    "description": "NMS - Printer Policy",
+    "nodeClass": "NMS_PRINTER",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 12,
+    "name": "NMS - Scanner Policy",
+    "description": "NMS - Scanner Policy",
+    "nodeClass": "NMS_SCANNER",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 13,
+    "name": "NMS - Dial Manager Policy",
+    "description": "NMS - Dial Manager Policy",
+    "nodeClass": "NMS_DIAL_MANAGER",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 14,
+    "name": "NMS - Wap Policy",
+    "description": "NMS - Wap Policy",
+    "nodeClass": "NMS_WAP",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 15,
+    "name": "NMS - IpSLA Policy",
+    "description": "NMS - IpSLA Policy",
+    "nodeClass": "NMS_IPSLA",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 16,
+    "name": "NMS - Computer Policy",
+    "description": "NMS - Computer Policy",
+    "nodeClass": "NMS_COMPUTER",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 17,
+    "name": "NMS - VM Host Policy",
+    "description": "NMS - VM Host Policy",
+    "nodeClass": "NMS_VM_HOST",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 18,
+    "name": "NMS - Appliance Policy",
+    "description": "NMS - Appliance Policy",
+    "nodeClass": "NMS_APPLIANCE",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 19,
+    "name": "NMS - Other Policy",
+    "description": "NMS - Other Policy",
+    "nodeClass": "NMS_OTHER",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 20,
+    "name": "NMS - Server Policy",
+    "description": "NMS - Server Policy",
+    "nodeClass": "NMS_SERVER",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 21,
+    "name": "NMS - Phone Policy",
+    "description": "NMS - Phone Policy",
+    "nodeClass": "NMS_PHONE",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 22,
+    "name": "NMS - Virtual Machine Policy",
+    "description": "NMS - Virtual Machine Policy",
+    "nodeClass": "NMS_VIRTUAL_MACHINE",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 23,
+    "name": "Network Management Agent Policy",
+    "description": "Network Management Agent Policy",
+    "nodeClass": "NMS_NETWORK_MANAGEMENT_AGENT",
+    "updated": 1739886598.358261,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 24,
+    "name": "Linux Server",
+    "description": "Linux Server",
+    "nodeClass": "LINUX_SERVER",
+    "updated": 1739886603.209374,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 25,
+    "name": "Mac Server",
+    "description": "Mac Server",
+    "nodeClass": "MAC_SERVER",
+    "updated": 1739886603.209374,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 26,
+    "name": "Cloud Monitor",
+    "description": "Cloud Monitor",
+    "nodeClass": "CLOUD_MONITOR_TARGET",
+    "updated": 1739886603.209374,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 27,
+    "name": "Hyper-V Host Policy",
+    "description": "Hyper-V Host Policy",
+    "nodeClass": "HYPERV_VMM_HOST",
+    "updated": 1739886604.008999,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 28,
+    "name": "Hyper-V Guest VM Policy",
+    "description": "Hyper-V Guest VM Policy",
+    "nodeClass": "HYPERV_VMM_GUEST",
+    "updated": 1739886604.008999,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 30,
+    "name": "Apple iOS Mobile Policy",
+    "description": "Default Apple iOS Mobile Policy",
+    "nodeClass": "APPLE_IOS",
+    "updated": 1739886606.123504,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 31,
+    "name": "Apple iPadOS Mobile Policy",
+    "description": "Default Apple iPadOS Mobile Policy",
+    "nodeClass": "APPLE_IPADOS",
+    "updated": 1739886610.015846,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 34,
+    "name": "AOSP Policy",
+    "description": "Default AOSP Policy",
+    "nodeClass": "AOSP",
+    "updated": 1782264014.193837,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 32,
+    "name": "Unmanaged Device Policy",
+    "description": "Unmanaged Device Policy",
+    "nodeClass": "UNMANAGED_DEVICE",
+    "updated": 1749000084.475134,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 33,
+    "name": "Managed Device Policy",
+    "description": "Managed Device Policy",
+    "nodeClass": "MANAGED_DEVICE",
+    "updated": 1749000084.485808,
+    "nodeClassDefault": true
+  },
+  {
+    "id": 29,
+    "name": "Android Mobile Policy",
+    "description": "Default Android Mobile Policy",
+    "nodeClass": "ANDROID",
+    "updated": 1739886605.614273,
+    "nodeClassDefault": true
+  }
+]

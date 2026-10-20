@@ -1,0 +1,71 @@
+{
+  "count": 5,
+  "cursor": {
+    "name": "<redacted>",
+    "offset": 0,
+    "count": 58,
+    "expires": 1787743335.603561
+  },
+  "results": [
+    {
+      "installDate": "2026-08-25",
+      "location": "C:\\Program Files\\WindowsApps\\MSTeams_1.0.0.0_x64__8wekyb3d8bbwe",
+      "name": "<redacted>",
+      "publisher": "Microsoft Corporation",
+      "size": 0,
+      "version": "<ip>",
+      "productCode": "MSTeams-getappxpackages",
+      "isSystemComponent": false,
+      "deviceId": 1,
+      "timestamp": 1787742487.0
+    },
+    {
+      "installDate": "2026-08-25",
+      "location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsSoundRecorder_1.0.76.0_x64__8wekyb3d8bbwe",
+      "name": "<redacted>",
+      "publisher": "Microsoft Corporation",
+      "size": 0,
+      "version": "<ip>",
+      "productCode": "<host>",
+      "isSystemComponent": false,
+      "deviceId": 1,
+      "timestamp": 1787742487.0
+    },
+    {
+      "installDate": "2026-08-25",
+      "location": "C:\\Program Files\\WindowsApps\\Microsoft.SecHealthUI_1000.26100.1.0_x64__8wekyb3d8bbwe",
+      "name": "<redacted>",
+      "publisher": "Microsoft Corporation",
+      "size": 0,
+      "version": "1000.26100.1.0",
+      "productCode": "<host>",
+      "isSystemComponent": false,
+      "deviceId": 1,
+      "timestamp": 1787742487.0
+    },
+    {
+      "installDate": "2026-08-25",
+      "location": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_18.2308.1034.0_x64__8wekyb3d8bbwe",
+      "name": "<redacted>",
+      "publisher": "Microsoft Corporation",
+      "size": 0,
+      "version": "18.2308.1034.0",
+      "productCode": "<host>",
+      "isSystemComponent": false,
+      "deviceId": 1,
+      "timestamp": 1787742487.0
+    },
+    {
+      "installDate": "2026-08-25",
+      "location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsStore_22401.1400.6.0_x64__8wekyb3d8bbwe",
+      "name": "<redacted>",
+      "publisher": "Microsoft Corporation",
+      "size": 0,
+      "version": "22401.1400.6.0",
+      "productCode": "<host>",
+      "isSystemComponent": false,
+      "deviceId": 1,
+      "timestamp": 1787742487.0
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "<redacted>",
+    "driveLetter": "C:",
+    "label": "Windows",
+    "deviceType": "Local Disk",
+    "fileSystem": "NTFS",
+    "autoMount": true,
+    "compressed": false,
+    "capacity": 68427968512,
+    "freeSpace": 49811660800,
+    "serialNumber": "<redacted>"
+  }
+]

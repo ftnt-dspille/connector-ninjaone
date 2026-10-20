@@ -1,0 +1,35 @@
+# Config-only project file: the connector itself is a FortiSOAR package (imported
+# on-box from the ninjaone/ directory) and is not pip-installable. This file
+# carries the ruff + pytest configuration the CI workflows use.
+
+[project]
+name = "connector-ninjaone"
+version = "1.0.0"
+description = "FortiSOAR NinjaOne connector -- endpoint inventory, OS and third-party patching, script execution, alerts, and ticketing over the NinjaOne Public API v2."
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.6", "requests>=2.31"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Put the repo root on sys.path so `from ninjaone import operations` resolves.
+pythonpath = ["."]
+# Live tests hit a real NinjaOne tenant and can reboot machines, so they are
+# opt-in: `pytest -m live`. The default run stays offline and free.
+addopts = "-m 'not live'"
+markers = [
+    "live: exercises a real NinjaOne tenant; needs .env.ninjaone credentials",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+# The connector ships as a FortiSOAR package and follows that codebase's
+# conventions (single quotes, `.format()` over f-strings, `object` base classes),
+# so lint the test suite and tools, and leave the connector package alone.
+include = ["tests/**/*.py", "tools/**/*.py"]
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "I", "UP", "B"]

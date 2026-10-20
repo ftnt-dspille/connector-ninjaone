@@ -1,0 +1,202 @@
+[
+  {
+    "adapterName": "{373A2A54-0B17-44F3-A88E-3045AE26F344}",
+    "defaultGateway": "<ip>",
+    "interfaceType": "Ethernet 802.3",
+    "dnsHostName": "<redacted>",
+    "dnsServers": "<ipv6>;<ipv6>;<ipv6>",
+    "interfaceIndex": "4",
+    "interfaceName": "Intel(R) PRO/1000 MT Network Connection #4",
+    "ipAddress": [
+      "<redacted>",
+      "<redacted>"
+    ],
+    "linkSpeed": "0",
+    "macAddress": [
+      "<redacted>"
+    ],
+    "mtu": "1500",
+    "status": "Down",
+    "subnetMask": "<ip>"
+  },
+  {
+    "adapterName": "{527DB59D-F926-44F9-8CC2-7C39FC463F6D}",
+    "defaultGateway": "<ip>",
+    "interfaceType": "Ethernet 802.3",
+    "dnsHostName": "<redacted>",
+    "dnsServers": "<ipv6>;<ipv6>;<ipv6>",
+    "interfaceIndex": "5",
+    "interfaceName": "Intel(R) PRO/1000 MT Network Connection #8",
+    "ipAddress": [
+      "<redacted>",
+      "<redacted>"
+    ],
+    "linkSpeed": "0",
+    "macAddress": [
+      "<redacted>"
+    ],
+    "mtu": "1500",
+    "status": "Down",
+    "subnetMask": "<ip>"
+  },
+  {
+    "adapterName": "{61E4B285-8980-404D-BF0D-A74F9FCD32B9}",
+    "defaultGateway": "<ip>",
+    "interfaceType": "Ethernet 802.3",
+    "dnsHostName": "<redacted>",
+    "dnsServers": "<ip>",
+    "interfaceIndex": "6",
+    "interfaceName": "Intel(R) PRO/1000 MT Network Connection",
+    "ipAddress": [
+      "<redacted>",
+      "<redacted>"
+    ],
+    "linkSpeed": "1000000000",
+    "macAddress": [
+      "<redacted>"
+    ],
+    "mtu": "1500",
+    "status": "Up",
+    "subnetMask": "<ip>"
+  },
+  {
+    "adapterName": "{7A41B895-94D4-4A1A-BD09-53B1EB4C1369}",
+    "defaultGateway": "<ip>",
+    "interfaceType": "Ethernet 802.3",
+    "dnsHostName": "<redacted>",
+    "dnsServers": "<ipv6>;<ipv6>;<ipv6>",
+    "interfaceIndex": "7",
+    "interfaceName": "Intel(R) PRO/1000 MT Network Connection #3",
+    "ipAddress": [
+      "<redacted>",
+      "<redacted>"
+    ],
+    "linkSpeed": "0",
+    "macAddress": [
+      "<redacted>"
+    ],
+    "mtu": "1500",
+    "status": "Down",
+    "subnetMask": "<ip>"
+  },
+  {
+    "adapterName": "{7ABE8E6D-0282-421E-AFCB-7301A15C2AEF}",
+    "defaultGateway": "<ip>",
+    "interfaceType": "Ethernet 802.3",
+    "dnsHostName": "<redacted>",
+    "dnsServers": "<ipv6>;<ipv6>;<ipv6>",
+    "interfaceIndex": "8",
+    "interfaceName": "Intel(R) PRO/1000 MT Network Connection #6",
+    "ipAddress": [
+      "<redacted>",
+      "<redacted>"
+    ],
+    "linkSpeed": "0",
+    "macAddress": [
+      "<redacted>"
+    ],
+    "mtu": "1500",
+    "status": "Down",
+    "subnetMask": "<ip>"
+  },
+  {
+    "adapterName": "{80F6C1E0-F1C2-483B-9019-D83C82D8F083}",
+    "defaultGateway": "<ip>",
+    "interfaceType": "Ethernet 802.3",
+    "dnsHostName": "<redacted>",
+    "dnsServers": "<ipv6>;<ipv6>;<ipv6>",
+    "interfaceIndex": "9",
+    "interfaceName": "Intel(R) PRO/1000 MT Network Connection #2",
+    "ipAddress": [
+      "<redacted>",
+      "<redacted>"
+    ],
+    "linkSpeed": "0",
+    "macAddress": [
+      "<redacted>"
+    ],
+    "mtu": "1500",
+    "status": "Down",
+    "subnetMask": "<ip>"
+  },
+  {
+    "adapterName": "{B34D3E46-48CB-4529-9FBC-7ACB66C4FE0C}",
+    "defaultGateway": "<ip>",
+    "interfaceType": "Ethernet 802.3",
+    "dnsHostName": "<redacted>",
+    "dnsServers": "<ipv6>;<ipv6>;<ipv6>",
+    "interfaceIndex": "11",
+    "interfaceName": "Intel(R) PRO/1000 MT Network Connection #9",
+    "ipAddress": [
+      "<redacted>",
+      "<redacted>"
+    ],
+    "linkSpeed": "0",
+    "macAddress": [
+      "<redacted>"
+    ],
+    "mtu": "1500",
+    "status": "Down",
+    "subnetMask": "<ip>"
+  },
+  {
+    "adapterName": "{B7D22E23-E06F-4BCA-9A7B-1C44A7036B1C}",
+    "defaultGateway": "<ip>",
+    "interfaceType": "Ethernet 802.3",
+    "dnsHostName": "<redacted>",
+    "dnsServers": "<ipv6>;<ipv6>;<ipv6>",
+    "interfaceIndex": "12",
+    "interfaceName": "Intel(R) PRO/1000 MT Network Connection #7",
+    "ipAddress": [
+      "<redacted>",
+      "<redacted>"
+    ],
+    "linkSpeed": "0",
+    "macAddress": [
+      "<redacted>"
+    ],
+    "mtu": "1500",
+    "status": "Down",
+    "subnetMask": "<ip>"
+  },
+  {
+    "adapterName": "{E3FA0164-B455-47AA-9CB9-8CE075AB0423}",
+    "defaultGateway": "<ip>",
+    "interfaceType": "Ethernet 802.3",
+    "dnsHostName": "<redacted>",
+    "dnsServers": "<ipv6>;<ipv6>;<ipv6>",
+    "interfaceIndex": "14",
+    "interfaceName": "Intel(R) PRO/1000 MT Network Connection #5",
+    "ipAddress": [
+      "<redacted>",
+      "<redacted>"
+    ],
+    "linkSpeed": "0",
+    "macAddress": [
+      "<redacted>"
+    ],
+    "mtu": "1500",
+    "status": "Down",
+    "subnetMask": "<ip>"
+  },
+  {
+    "adapterName": "{E5BED004-D2CB-4E77-87AE-109A516A1F88}",
+    "defaultGateway": "<ip>",
+    "interfaceType": "Ethernet 802.3",
+    "dnsHostName": "<redacted>",
+    "dnsServers": "<ipv6>;<ipv6>;<ipv6>",
+    "interfaceIndex": "15",
+    "interfaceName": "Intel(R) PRO/1000 MT Network Connection #10",
+    "ipAddress": [
+      "<redacted>",
+      "<redacted>"
+    ],
+    "linkSpeed": "0",
+    "macAddress": [
+      "<redacted>"
+    ],
+    "mtu": "1500",
+    "status": "Down",
+    "subnetMask": "<ip>"
+  }
+]

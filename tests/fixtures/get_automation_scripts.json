@@ -1,0 +1,1602 @@
+[
+  {
+    "id": 1,
+    "name": "Reboot",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 2,
+    "name": "Enable SSH",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux",
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 3,
+    "name": "Disable SSH",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux",
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 4,
+    "name": "Disable Firewall",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux",
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 5,
+    "name": "Enable Firewall",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux",
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 6,
+    "name": "Empty Trash",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux",
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 7,
+    "name": "Disable Sleep",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 8,
+    "name": "Enable Sleep",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 9,
+    "name": "Forced logout",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 10,
+    "name": "Flush DNS",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux",
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 17,
+    "name": "Disable ARD",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 18,
+    "name": "Disable Mac Sleep",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 19,
+    "name": "Disable VNC",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 20,
+    "name": "Enable ARD",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 21,
+    "name": "Enable VNC",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 22,
+    "name": "Enable Wake On LAN",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 23,
+    "name": "Kill Core Audio",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 24,
+    "name": "Purge Disk Cache",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 25,
+    "name": "Reapply user permissions",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 26,
+    "name": "Reboot",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 27,
+    "name": "Repair Disk Perms",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 28,
+    "name": "Repair SSH",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 29,
+    "name": "Repair TeamViewer",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 30,
+    "name": "Reset Launcher Services",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 31,
+    "name": "Reset Printing",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 32,
+    "name": "Turn Automatic Updates Off",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 33,
+    "name": "Wake Display Up",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 34,
+    "name": "List all available patches",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 35,
+    "name": "Download updates, don't install",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 36,
+    "name": "Install only recommended patches",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 37,
+    "name": "Install only recommended patches, restart if required (requires 10.13.4 or newer)",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 38,
+    "name": "Install all available patches",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 39,
+    "name": "Install all available patches, restart if required (requires 10.13.4 or newer)",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 40,
+    "name": "Install Application",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 41,
+    "name": "Enable CD-ROM drives",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 42,
+    "name": "Disable CD-ROM drives",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 43,
+    "name": "Enable USB drives",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 44,
+    "name": "Disable USB drives",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 45,
+    "name": "Enable Floppy drive",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 46,
+    "name": "Disable Floppy drive",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 47,
+    "name": "Fix rebuild performance counters",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 48,
+    "name": "Group policy force update",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 49,
+    "name": "Clear DNS cache",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 50,
+    "name": "Clear Event Logs",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 51,
+    "name": "Delete Temporary Files",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 52,
+    "name": "Empty Recycle Bin",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 53,
+    "name": "Fix File System Errors",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 54,
+    "name": "Release & Renew IP Address",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 55,
+    "name": "Run Windows Cleanup",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 56,
+    "name": "SFC Scannow",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 57,
+    "name": "Reboot",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 58,
+    "name": "Force Reboot",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 59,
+    "name": "Reboot (pending reboot devices)",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 60,
+    "name": "Enable User Access Control",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 61,
+    "name": "Disable User Access Control",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 62,
+    "name": "Log Off Current User",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 63,
+    "name": "Remove Google toolbar",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 64,
+    "name": "Remove Yahoo toolbar",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 65,
+    "name": "Defrag",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 66,
+    "name": "Removable Media",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 67,
+    "name": "Run Application",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 68,
+    "name": "Install Application",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 69,
+    "name": "Windows Service",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 70,
+    "name": "Toggle System Restore Enabled/Disabled",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1739886608.874232,
+    "updatedOn": 1739886608.874232
+  },
+  {
+    "id": 71,
+    "name": "OS patch scan",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1740539275.657287,
+    "updatedOn": 1740539275.657287
+  },
+  {
+    "id": 72,
+    "name": "OS patch scan",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1740539275.657287,
+    "updatedOn": 1740539275.657287
+  },
+  {
+    "id": 73,
+    "name": "OS patch scan",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1740539275.657287,
+    "updatedOn": 1740539275.657287
+  },
+  {
+    "id": 74,
+    "name": "OS patch apply",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1740539275.657287,
+    "updatedOn": 1740539275.657287
+  },
+  {
+    "id": 75,
+    "name": "OS patch apply",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1740539275.657287,
+    "updatedOn": 1740539275.657287
+  },
+  {
+    "id": 76,
+    "name": "OS patch apply",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1740539275.657287,
+    "updatedOn": 1740539275.657287
+  },
+  {
+    "id": 77,
+    "name": "Software patch scan",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1740539275.657287,
+    "updatedOn": 1740539275.657287
+  },
+  {
+    "id": 78,
+    "name": "Software patch scan",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1740539275.657287,
+    "updatedOn": 1740539275.657287
+  },
+  {
+    "id": 79,
+    "name": "Software patch apply",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1740539275.657287,
+    "updatedOn": 1740539275.657287
+  },
+  {
+    "id": 80,
+    "name": "Software patch apply",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1740539275.657287,
+    "updatedOn": 1740539275.657287
+  },
+  {
+    "id": 81,
+    "name": "Set Maintenance Mode",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1755656423.548452,
+    "updatedOn": 1755656423.548452
+  },
+  {
+    "id": 82,
+    "name": "Set Maintenance Mode",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1755656423.548452,
+    "updatedOn": 1755656423.548452
+  },
+  {
+    "id": 83,
+    "name": "Set Maintenance Mode",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1755656423.548452,
+    "updatedOn": 1755656423.548452
+  },
+  {
+    "id": 84,
+    "name": "Remove Maintenance Mode",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Windows"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1755656423.548452,
+    "updatedOn": 1755656423.548452
+  },
+  {
+    "id": 85,
+    "name": "Remove Maintenance Mode",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64"
+    ],
+    "operatingSystems": [
+      "Mac"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1755656423.548452,
+    "updatedOn": 1755656423.548452
+  },
+  {
+    "id": 86,
+    "name": "Remove Maintenance Mode",
+    "description": null,
+    "active": true,
+    "language": "native",
+    "architecture": [
+      "64",
+      "32"
+    ],
+    "operatingSystems": [
+      "Linux"
+    ],
+    "scriptParameters": [],
+    "scriptVariables": null,
+    "createdBy": null,
+    "lastUpdatedBy": null,
+    "createdOn": 1755656423.548452,
+    "updatedOn": 1755656423.548452
+  }
+]

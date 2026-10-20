@@ -1,0 +1,582 @@
+[
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\MSTeams_1.0.0.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "MSTeams-getappxpackages",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsSoundRecorder_1.0.76.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.SecHealthUI_1000.26100.1.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1000.26100.1.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftOfficeHub_18.2308.1034.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "18.2308.1034.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsStore_22401.1400.6.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "22401.1400.6.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.YourPhone_0.24012.105.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "0.24012.105.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-26",
+    "location": "Unknown",
+    "name": "<redacted>",
+    "publisher": "Notepad++ Team",
+    "size": 20211,
+    "version": "8.9.8",
+    "productCode": "Notepad++",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\NotepadPlusPlus_1.0.0.0_neutral__7njy0v32s6xk6",
+    "name": "<redacted>",
+    "publisher": "Notepad++",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "NotepadPlusPlus-getappxpackages",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.RawImageExtension_2.3.171.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsTerminal_1.18.10301.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.18.10301.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Windows\\System32\\",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "",
+    "productCode": "mstsc-<uuid>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.HEIFImageExtension_1.0.63001.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.0.63001.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.ScreenSketch_11.2307.52.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "11.2307.52.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.WebpImageExtension_1.0.62681.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.0.62681.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.XboxGamingOverlay_2.624.1111.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "2.624.1111.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsNotepad_11.2312.18.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "11.2312.18.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\7-Zip\\",
+    "name": "<redacted>",
+    "publisher": "Igor Pavlov",
+    "size": 5082,
+    "version": "19.00",
+    "productCode": "7-Zip",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\<host>.Photos_24.24010.29003.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "24.24010.29003.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsCalculator_11.2311.0.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "11.2311.0.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "Unknown",
+    "name": "<redacted>",
+    "publisher": "Mozilla",
+    "size": 336,
+    "version": "123.0.1",
+    "productCode": "MozillaMaintenanceService",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.GamingApp_2402.900.28.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "2402.900.28.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.BingNews_1.0.2.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.PowerAutomateDesktop_1.0.1080.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.0.1080.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsFeedbackHub_1.2401.20253.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.2401.20253.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.BingWeather_3.2.9.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsCamera_2023.2312.3.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "2023.2312.3.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 2180180,
+    "version": "151.0.4129.107",
+    "productCode": "Microsoft Edge",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.Paint_11.2302.20.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "11.2302.20.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\<host>.DevHome_0.0.0.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\<host>.WebExperience_424.1301.270.9_x64__cw5n1h2txyewy",
+    "name": "<redacted>",
+    "publisher": "Microsoft Windows",
+    "size": 0,
+    "version": "424.1301.270.9",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.GetHelp_10.2302.10601.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "10.2302.10601.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\<host>.Stable_151.0.4129.107_neutral__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "151.0.4129.107",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.AVCEncoderVideoExtension_1.0.271.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.Todos_0.104.62421.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "0.104.62421.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Clipchamp.Clipchamp_3.0.10220.0_neutral__yxz26nhyzhsrt",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corp.",
+    "size": 0,
+    "version": "3.0.10220.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\MicrosoftWindows.CrossDevice_0.23101.22.0_x64__cw5n1h2txyewy",
+    "name": "<redacted>",
+    "publisher": "Microsoft Windows",
+    "size": 0,
+    "version": "0.23101.22.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.StorePurchaseApp_22312.1400.6.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "22312.1400.6.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftSolitaireCollection_4.19.3190.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Studios",
+    "size": 0,
+    "version": "4.19.3190.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.HEVCVideoExtension_2.0.61931.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "2.0.61931.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.XboxSpeechToTextOverlay_1.97.17002.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.97.17002.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.DesktopAppInstaller_1.21.10120.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.21.10120.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.ZuneMusic_11.2312.8.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "11.2312.8.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\<host>.TCUI_1.23.28005.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.23.28005.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "Unknown",
+    "name": "<redacted>",
+    "publisher": "Fleet Device Management (<host>)",
+    "size": 89640,
+    "version": "1.59.0",
+    "productCode": "{AA030912-98FE-4303-9488-32FDEEEE0C57}",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.ApplicationCompatibilityEnhancements_1.2401.10.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.2401.10.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.XboxIdentityProvider_12.110.15002.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "12.110.15002.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.AV1VideoExtension_1.1.61781.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.1.61781.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\MicrosoftCorporationII.QuickAssist_2.0.29.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corp.",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "Unknown",
+    "name": "<redacted>",
+    "publisher": "Microsoft Edge Update",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "Microsoft Edge Update",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.MPEG2VideoExtension_1.0.61931.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.0.61931.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.BingSearch_1.0.79.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.MicrosoftStickyNotes_4.0.4602.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "4.0.4602.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.OutlookForWindows_1.0.0.0_neutral__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-26",
+    "location": "C:\\Program Files (x86)\\NinjaOne",
+    "name": "<redacted>",
+    "publisher": "NinjaRMM LLC",
+    "size": 96719,
+    "version": "14.0.9116",
+    "productCode": "{817AF559-0C8C-4539-94D8-3096AF4B08D9}",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.VP9VideoExtensions_1.1.451.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.WebMediaExtensions_1.0.62931.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "1.0.62931.0",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\Mozilla Firefox",
+    "name": "<redacted>",
+    "publisher": "Mozilla",
+    "size": 235518,
+    "version": "123.0.1",
+    "productCode": "Mozilla Firefox 123.0.1 (x64 en-US)",
+    "isSystemComponent": false
+  },
+  {
+    "installDate": "2026-08-25",
+    "location": "C:\\Program Files\\WindowsApps\\Microsoft.WindowsAlarms_1.0.188.0_x64__8wekyb3d8bbwe",
+    "name": "<redacted>",
+    "publisher": "Microsoft Corporation",
+    "size": 0,
+    "version": "<ip>",
+    "productCode": "<host>",
+    "isSystemComponent": false
+  }
+]

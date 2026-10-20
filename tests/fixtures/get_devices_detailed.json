@@ -1,0 +1,109 @@
+{
+  "count": 1,
+  "devices": [
+    {
+      "id": 1,
+      "uid": "<redacted>",
+      "organizationId": 1,
+      "locationId": 1,
+      "nodeClass": "WINDOWS_WORKSTATION",
+      "nodeRoleId": 201,
+      "rolePolicyId": 2,
+      "approvalStatus": "APPROVED",
+      "offline": true,
+      "displayName": "<redacted>",
+      "systemName": "<redacted>",
+      "dnsName": "<redacted>",
+      "created": 1787742460.493089,
+      "lastContact": 1787742948.382,
+      "lastUpdate": 1787742948.382,
+      "tags": [],
+      "ipAddresses": [
+        "<redacted>",
+        "<redacted>"
+      ],
+      "macAddresses": [
+        "<redacted>"
+      ],
+      "publicIP": "<redacted>",
+      "os": {
+        "manufacturer": "Microsoft Corporation",
+        "name": "<redacted>",
+        "architecture": "64-bit",
+        "lastBootTime": 1787665082.0,
+        "buildNumber": "26100",
+        "releaseId": "24H2",
+        "servicePackMajorVersion": 0,
+        "servicePackMinorVersion": 0,
+        "locale": "en-US",
+        "language": "English",
+        "needsReboot": false
+      },
+      "system": {
+        "name": "<redacted>",
+        "manufacturer": "QEMU",
+        "model": "Standard PC (Q35 + ICH9, 2009)",
+        "biosSerialNumber": "<redacted>",
+        "serialNumber": "<redacted>",
+        "domain": "<redacted>",
+        "domainRole": "Member Workstation",
+        "numberOfProcessors": 4,
+        "totalPhysicalMemory": 8583073792,
+        "virtualMachine": false,
+        "chassisType": "UNKNOWN"
+      },
+      "memory": {
+        "capacity": 8583073792
+      },
+      "processors": [
+        {
+          "architecture": "x64",
+          "maxClockSpeed": 2300000000,
+          "clockSpeed": 2300000000,
+          "name": "<redacted>",
+          "numCores": 1,
+          "numLogicalCores": 1
+        },
+        {
+          "architecture": "x64",
+          "maxClockSpeed": 2300000000,
+          "clockSpeed": 2300000000,
+          "name": "<redacted>",
+          "numCores": 1,
+          "numLogicalCores": 1
+        },
+        {
+          "architecture": "x64",
+          "maxClockSpeed": 2300000000,
+          "clockSpeed": 2300000000,
+          "name": "<redacted>",
+          "numCores": 1,
+          "numLogicalCores": 1
+        },
+        {
+          "architecture": "x64",
+          "maxClockSpeed": 2300000000,
+          "clockSpeed": 2300000000,
+          "name": "<redacted>",
+          "numCores": 1,
+          "numLogicalCores": 1
+        }
+      ],
+      "volumes": [
+        {
+          "nodeId": 1,
+          "name": "<redacted>",
+          "label": "Windows",
+          "deviceType": "Local Disk",
+          "fileSystem": "NTFS",
+          "autoMount": false,
+          "compressed": false,
+          "capacity": 68427968512,
+          "freeSpace": 49811660800,
+          "serialNumber": "<redacted>"
+        }
+      ],
+      "deviceType": "AgentDevice"
+    }
+  ]
+}

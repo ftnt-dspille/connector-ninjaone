@@ -1,0 +1,16 @@
+[
+  {
+    "bytesPerSector": 512,
+    "description": "Disk drive",
+    "interfaceType": "SATA",
+    "manufacturer": "UNKNOWN",
+    "mediaType": "Fixed hard disk media",
+    "model": "QEMU HARDDISK",
+    "name": "<redacted>",
+    "partitionCount": 3,
+    "serialNumber": "<redacted>",
+    "size": 68719476736,
+    "smartCapable": true,
+    "status": "OK"
+  }
+]

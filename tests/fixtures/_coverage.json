@@ -1,0 +1,401 @@
+{
+  "add_ticket_comment": {
+    "detail": "Forbidden. [403]: Access key does not have user context which is required for this request",
+    "note": "needs the ticketing add-on",
+    "result": "fail",
+    "returned": "",
+    "tier": "write"
+  },
+  "apply_os_patches": {
+    "detail": "Blocked by tenant policy, not by the connector: an earlier run (device online) returned 400 'OS patching is not enabled. Process can not start.' The reason recorded on the most recent attempt was 'Device is offline', because the endpoint was mid-reboot. Enable patching in the device's policy to exercise this.",
+    "note": "needs OS patching enabled in the device policy",
+    "result": "fail",
+    "returned": "",
+    "tier": "write"
+  },
+  "apply_software_patches": {
+    "detail": "Blocked by tenant policy, not by the connector: an earlier run (device online) returned 400 'Software patching is not enabled. Process can not start.' The reason recorded on the most recent attempt was 'Device is offline', because the endpoint was mid-reboot. Enable patching in the device's policy to exercise this.",
+    "note": "needs software patching enabled in the device policy",
+    "result": "fail",
+    "returned": "",
+    "tier": "write"
+  },
+  "cancel_maintenance": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "dict{status,device_id}",
+    "tier": "write"
+  },
+  "check_health": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "True",
+    "tier": "read"
+  },
+  "control_windows_service": {
+    "detail": "",
+    "note": "bounces a cosmetic service",
+    "result": "ok",
+    "returned": "dict{status,device_id,service_id,action}",
+    "tier": "disrupt"
+  },
+  "create_ticket": {
+    "detail": "Forbidden. [403]: Access key does not have user context which is required for this request",
+    "note": "needs the ticketing add-on",
+    "result": "fail",
+    "returned": "",
+    "tier": "write"
+  },
+  "fetch_patch_findings": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "count=0",
+    "tier": "read"
+  },
+  "generate_installer": {
+    "detail": "",
+    "note": "mints a real installer link; usage_limit 1",
+    "result": "ok",
+    "returned": "dict{url}",
+    "tier": "write"
+  },
+  "get_activities": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "activities=7",
+    "tier": "read"
+  },
+  "get_alerts": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[0]",
+    "tier": "read"
+  },
+  "get_automation_scripts": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[80]",
+    "tier": "read"
+  },
+  "get_device": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "dict{id,uid,organizationId,locationId}",
+    "tier": "read"
+  },
+  "get_device_activities": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "activities=6",
+    "tier": "read"
+  },
+  "get_device_alerts": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[0]",
+    "tier": "read"
+  },
+  "get_device_custom_fields": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "dict{}",
+    "tier": "read"
+  },
+  "get_device_dashboard_url": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "dict{url}",
+    "tier": "read"
+  },
+  "get_device_disks": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[1]",
+    "tier": "read"
+  },
+  "get_device_health_report": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "count=1",
+    "tier": "read"
+  },
+  "get_device_installed_os_patches": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[0]",
+    "tier": "read"
+  },
+  "get_device_installed_software_patches": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[0]",
+    "tier": "read"
+  },
+  "get_device_jobs": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[0]",
+    "tier": "read"
+  },
+  "get_device_last_logged_on_user": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "dict{status}",
+    "tier": "read"
+  },
+  "get_device_network_interfaces": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[10]",
+    "tier": "read"
+  },
+  "get_device_pending_os_patches": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[0]",
+    "tier": "read"
+  },
+  "get_device_pending_software_patches": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[0]",
+    "tier": "read"
+  },
+  "get_device_processors": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[4]",
+    "tier": "read"
+  },
+  "get_device_software": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[58]",
+    "tier": "read"
+  },
+  "get_device_volumes": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[1]",
+    "tier": "read"
+  },
+  "get_device_windows_services": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[241]",
+    "tier": "read"
+  },
+  "get_devices": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "count=1",
+    "tier": "read"
+  },
+  "get_devices_detailed": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "count=1",
+    "tier": "read"
+  },
+  "get_group_devices": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[1]",
+    "tier": "read"
+  },
+  "get_groups": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[35]",
+    "tier": "read"
+  },
+  "get_jobs": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[0]",
+    "tier": "read"
+  },
+  "get_organization": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "dict{name,description,nodeApprovalMode,id}",
+    "tier": "read"
+  },
+  "get_organization_devices": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "count=1",
+    "tier": "read"
+  },
+  "get_organization_locations": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[1]",
+    "tier": "read"
+  },
+  "get_organizations": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "count=1",
+    "tier": "read"
+  },
+  "get_pending_os_patches_report": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "count=0",
+    "tier": "read"
+  },
+  "get_pending_software_patches_report": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "count=0",
+    "tier": "read"
+  },
+  "get_policies": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[34]",
+    "tier": "read"
+  },
+  "get_scripting_options": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "dict{categories,scripts,credentials}",
+    "tier": "read"
+  },
+  "get_software_inventory_report": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "count=5",
+    "tier": "read"
+  },
+  "get_software_products": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "list[8745]",
+    "tier": "read"
+  },
+  "get_ticket": {
+    "detail": "Forbidden. [403]: Ninja Ticketing Integration is not enabled",
+    "note": "needs the ticketing add-on",
+    "result": "fail",
+    "returned": "",
+    "tier": "read"
+  },
+  "get_tickets_by_board": {
+    "detail": "Forbidden. [403]: Ninja Ticketing Integration is not enabled",
+    "note": "needs the ticketing add-on",
+    "result": "fail",
+    "returned": "",
+    "tier": "read"
+  },
+  "reboot_device": {
+    "detail": "NinjaOne recorded 'Action completed: Reboot Result: SUCCESS Output: Reboot System: Start reboot forced=false returned Success' and the endpoint did go down. The reboot is DEFERRED, not immediate: uptime is unchanged for a minute or two after the call returns, so an immediate uptime check looks like nothing happened.",
+    "note": "reboots the endpoint; run last",
+    "result": "ok",
+    "returned": "dict{status,device_id,mode}",
+    "tier": "disrupt"
+  },
+  "reset_alert": {
+    "detail": "no triggered condition exists",
+    "note": "needs a triggered condition to exist",
+    "result": "skip",
+    "returned": "",
+    "tier": "write"
+  },
+  "run_script": {
+    "detail": "Forbidden. [403]: Access key does not have user context which is required for this request",
+    "note": "runs the built-in \"Clear DNS cache\"",
+    "result": "fail",
+    "returned": "",
+    "tier": "disrupt"
+  },
+  "scan_os_patches": {
+    "detail": "Blocked by tenant policy, not by the connector: an earlier run (device online) returned 400 'OS patching is not enabled. Process can not start.' The reason recorded on the most recent attempt was 'Device is offline', because the endpoint was mid-reboot. Enable patching in the device's policy to exercise this.",
+    "note": "needs OS patching enabled in the device policy",
+    "result": "fail",
+    "returned": "",
+    "tier": "write"
+  },
+  "scan_software_patches": {
+    "detail": "Blocked by tenant policy, not by the connector: an earlier run (device online) returned 400 'Software patching is not enabled. Process can not start.' The reason recorded on the most recent attempt was 'Device is offline', because the endpoint was mid-reboot. Enable patching in the device's policy to exercise this.",
+    "note": "needs software patching enabled in the device policy",
+    "result": "fail",
+    "returned": "",
+    "tier": "write"
+  },
+  "schedule_maintenance": {
+    "detail": "",
+    "note": "10-minute window, cancelled immediately after",
+    "result": "ok",
+    "returned": "dict{status,device_id,end}",
+    "tier": "write"
+  },
+  "search_devices": {
+    "detail": "",
+    "note": "",
+    "result": "ok",
+    "returned": "devices=1",
+    "tier": "read"
+  },
+  "update_device": {
+    "detail": "",
+    "note": "sets the display name, then restores it",
+    "result": "ok",
+    "returned": "dict{status}",
+    "tier": "write"
+  },
+  "update_device_custom_fields": {
+    "detail": "Not Found: the requested device, organization, or record does not exist. [404]: Field Not Found",
+    "note": "needs a custom field defined in the tenant",
+    "result": "fail",
+    "returned": "",
+    "tier": "write"
+  },
+  "update_ticket": {
+    "detail": "Forbidden. [403]: Ninja Ticketing Integration is not enabled",
+    "note": "needs the ticketing add-on",
+    "result": "fail",
+    "returned": "",
+    "tier": "write"
+  }
+}

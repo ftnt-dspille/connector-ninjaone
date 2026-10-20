@@ -1,0 +1,155 @@
+{
+  "lastActivityId": 9,
+  "activities": [
+    {
+      "id": 9,
+      "activityTime": 1787742919.23995,
+      "deviceId": 1,
+      "seriesUid": "<uuid>",
+      "activityType": "ACTION",
+      "statusCode": "COMPLETED",
+      "status": "Completed",
+      "activityResult": "SUCCESS",
+      "sourceName": "<redacted>",
+      "subject": "<redacted>",
+      "message": "<redacted>",
+      "type": "Action",
+      "data": {
+        "message": {
+          "code": "agent_action_completed",
+          "params": {
+            "action_name": "Reboot",
+            "result": "SUCCESS",
+            "output": "<redacted>"
+          }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "activityTime": 1787742893.528012,
+      "deviceId": 1,
+      "seriesUid": "<uuid>",
+      "activityType": "ACTION",
+      "statusCode": "COMPLETED",
+      "status": "Completed",
+      "activityResult": "SUCCESS",
+      "sourceName": "<redacted>",
+      "subject": "<redacted>",
+      "message": "<redacted>",
+      "type": "Action",
+      "data": {
+        "message": {
+          "code": "agent_action_completed",
+          "params": {
+            "action_name": "RESTART service",
+            "result": "SUCCESS",
+            "output": "<redacted>"
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "activityTime": 1787742853.897541,
+      "deviceId": 1,
+      "activityType": "SYSTEM",
+      "statusCode": "NODE_UPDATED",
+      "status": "Device Updated",
+      "activityResult": "SUCCESS",
+      "message": "<redacted>",
+      "type": "System",
+      "data": {
+        "message": {
+          "code": "audit_node_updated_via_api",
+          "params": {
+            "nodeDisplayName": "ninjaone-connector-live-check",
+            "nodeId": "1",
+            "via": "mT1EnjjiQA2hK4muAiO9Wc3Gizg"
+          }
+        }
+      }
+    },
+    {
+      "id": 4,
+      "activityTime": 1787742460.51148,
+      "deviceId": 1,
+      "activityType": "SYSTEM",
+      "statusCode": "NODE_CREATED",
+      "status": "Device Created",
+      "activityResult": "SUCCESS",
+      "message": "<redacted>",
+      "type": "System",
+      "data": {
+        "message": {
+          "code": "device_registered",
+          "params": {
+            "nodeDisplayName": "<host>",
+            "nodeId": "1"
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "activityTime": 1787727183.14357,
+      "activityType": "SYSTEM",
+      "statusCode": "APP_USER_LOGGED_OUT",
+      "status": "Technician Logged Out",
+      "activityResult": "SUCCESS",
+      "userId": 1,
+      "message": "<redacted>",
+      "type": "System",
+      "data": {
+        "message": {
+          "code": "audit_app_user_logged_out",
+          "params": {
+            "appUserName": "Dylan Spille",
+            "appUserId": "1",
+            "appUserEmail": "dspille@<host>"
+          }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "activityTime": 1787711534.39055,
+      "activityType": "SYSTEM",
+      "statusCode": "APP_USER_LOGGED_IN",
+      "status": "Technician Logged In",
+      "activityResult": "SUCCESS",
+      "userId": 1,
+      "message": "<redacted>",
+      "type": "System",
+      "data": {
+        "message": {
+          "code": "audit_app_user_logged_in",
+          "params": {
+            "ip": "<ip>",
+            "appUserName": "Dylan Spille",
+            "mfa": "TOTP",
+            "appUserId": "1",
+            "appUserEmail": "dspille@<host>"
+          }
+        }
+      }
+    },
+    {
+      "id": 1,
+      "activityTime": 1787711534.373664,
+      "activityType": "SYSTEM",
+      "statusCode": "APP_USER_MFA_SETUP",
+      "status": "Technician MFA Configured",
+      "activityResult": "SUCCESS",
+      "userId": 1,
+      "message": "<redacted>",
+      "type": "System",
+      "data": {
+        "message": {
+          "code": "activity_status_APP_USER_MFA_SETUP",
+          "params": {}
+        }
+      }
+    }
+  ]
+}

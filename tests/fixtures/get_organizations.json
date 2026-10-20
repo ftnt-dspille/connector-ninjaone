@@ -1,0 +1,11 @@
+{
+  "count": 1,
+  "organizations": [
+    {
+      "name": "<redacted>",
+      "description": "Internal Infrastructure",
+      "nodeApprovalMode": "AUTOMATIC",
+      "id": 1
+    }
+  ]
+}

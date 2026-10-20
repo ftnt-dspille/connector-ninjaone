@@ -1,0 +1,3320 @@
+{
+  "name": "ninjaone",
+  "label": "NinjaOne",
+  "description": "NinjaOne (formerly NinjaRMM) is a unified endpoint management, patching, and ticketing platform. This connector inventories devices and installed software, reads and applies operating system and third-party patches, runs automation scripts, controls Windows services, reboots and schedules maintenance on endpoints, manages alerts and tickets, and ingests pending patches as findings so playbooks can drive remediation end to end.",
+  "publisher": "Community",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "version": "1.0.0",
+  "category": "Endpoint Management",
+  "icon_small_name": "small_icon.png",
+  "icon_large_name": "large_icon.png",
+  "vendor_version": "Public API 2.0",
+  "help_online": "https://app.ninjarmm.com/apidocs/",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "tags": [
+    "RMM",
+    "Endpoint",
+    "Patching",
+    "Vulnerability Management"
+  ],
+  "ingestion_config_schema": [
+    {
+      "title": "Patch Kind",
+      "name": "patch_kind",
+      "type": "select",
+      "required": false,
+      "editable": true,
+      "visible": true,
+      "options": [
+        "Both",
+        "Operating System",
+        "Third-Party Software"
+      ],
+      "value": "Both",
+      "tooltip": "Which patch sources to ingest.",
+      "description": "Which patch sources to ingest."
+    },
+    {
+      "title": "Device Filter",
+      "name": "device_filter",
+      "type": "text",
+      "required": false,
+      "editable": true,
+      "visible": true,
+      "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+      "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+    },
+    {
+      "title": "Status",
+      "name": "status",
+      "type": "multiselect",
+      "required": false,
+      "editable": true,
+      "visible": true,
+      "options": [
+        "MANUAL",
+        "APPROVED",
+        "FAILED",
+        "REJECTED"
+      ],
+      "tooltip": "Restrict to these patch statuses. Leave blank for all pending, failed, and rejected patches.",
+      "description": "Restrict to these patch statuses. Leave blank for all pending, failed, and rejected patches."
+    },
+    {
+      "title": "OS Severity",
+      "name": "severity",
+      "type": "multiselect",
+      "required": false,
+      "editable": true,
+      "visible": true,
+      "options": [
+        "UNKNOWN",
+        "LOW",
+        "MODERATE",
+        "IMPORTANT",
+        "CRITICAL",
+        "OPTIONAL"
+      ],
+      "tooltip": "Severity filter, applied to operating system patches only.",
+      "description": "Severity filter, applied to operating system patches only."
+    },
+    {
+      "title": "Software Impact",
+      "name": "impact",
+      "type": "multiselect",
+      "required": false,
+      "editable": true,
+      "visible": true,
+      "options": [
+        "UNKNOWN",
+        "OPTIONAL",
+        "RECOMMENDED",
+        "CRITICAL"
+      ],
+      "tooltip": "Impact filter, applied to third-party software patches only.",
+      "description": "Impact filter, applied to third-party software patches only."
+    },
+    {
+      "title": "Maximum Records per Pull",
+      "name": "max_records",
+      "type": "integer",
+      "required": false,
+      "editable": true,
+      "visible": true,
+      "value": 500,
+      "tooltip": "Hard stop on findings per run, per patch kind.",
+      "description": "Hard stop on findings per run, per patch kind."
+    }
+  ],
+  "configuration": {
+    "fields": [
+      {
+        "title": "Region",
+        "name": "region",
+        "type": "select",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "options": [
+          "Canada (ca.ninjarmm.com)",
+          "Europe (eu.ninjarmm.com)",
+          "North America (app.ninjarmm.com)",
+          "North America 2 (us2.ninjarmm.com)",
+          "Oceania (oc.ninjarmm.com)"
+        ],
+        "value": "North America (app.ninjarmm.com)",
+        "tooltip": "NinjaOne region. Must match where the API client app was created.",
+        "description": "NinjaOne instance your tenant lives in. NinjaOne is region-isolated: an API client created in one region does not exist in any other, and the token endpoint reports that as \"Client app not exist\" rather than an authentication error. Match this to the hostname you log in to."
+      },
+      {
+        "title": "Client ID",
+        "name": "client_id",
+        "type": "text",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "tooltip": "Client ID of the NinjaOne API application.",
+        "description": "Client ID of the API application, from Administration > Apps > API > Client App IDs. The application platform must be \"API Services (machine-to-machine)\"."
+      },
+      {
+        "title": "Client Secret",
+        "name": "client_secret",
+        "type": "password",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "tooltip": "Client secret of the NinjaOne API application.",
+        "description": "Client secret issued with the Client ID. Shown once at creation."
+      },
+      {
+        "title": "Scope",
+        "name": "scope",
+        "type": "text",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": "monitoring management control",
+        "tooltip": "Space-separated OAuth scopes. Must be a subset of what the app is granted.",
+        "description": "Space-separated OAuth scopes to request. \"monitoring\" covers reads, \"management\" covers writes, and \"control\" is required for script execution and reboots. The app must already be granted each scope requested here."
+      },
+      {
+        "title": "Custom Server URL",
+        "name": "server_url",
+        "type": "text",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "placeholder": "https://app.ninjarmm.com",
+        "tooltip": "Overrides Region. Leave blank unless pointed at a non-standard endpoint.",
+        "description": "Overrides the Region above. Only needed for a non-standard endpoint; leave blank otherwise."
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true,
+        "tooltip": "Verify the TLS certificate of the NinjaOne endpoint.",
+        "description": "Verify the TLS certificate of the NinjaOne endpoint."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_devices",
+      "title": "Get Devices",
+      "description": "Retrieves devices from NinjaOne, optionally narrowed by a device filter. Pages automatically up to the record limit.",
+      "category": "investigation",
+      "annotation": "get_devices",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Filter",
+          "name": "device_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+          "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        }
+      ],
+      "output_schema": {
+        "count": "",
+        "devices": [
+          {
+            "id": "",
+            "parentDeviceId": "",
+            "organizationId": "",
+            "locationId": "",
+            "nodeClass": "",
+            "nodeRoleId": "",
+            "policyId": "",
+            "approvalStatus": "",
+            "offline": "",
+            "displayName": "",
+            "systemName": "",
+            "dnsName": "",
+            "lastContact": "",
+            "lastUpdate": "",
+            "created": "",
+            "system": {
+              "name": "",
+              "manufacturer": "",
+              "model": "",
+              "serialNumber": "",
+              "domain": "",
+              "totalPhysicalMemory": ""
+            },
+            "os": {
+              "manufacturer": "",
+              "name": "",
+              "architecture": "",
+              "buildNumber": "",
+              "lastBootTime": ""
+            },
+            "ipAddresses": [],
+            "macAddresses": []
+          }
+        ]
+      }
+    },
+    {
+      "operation": "get_devices_detailed",
+      "title": "Get Devices (Detailed)",
+      "description": "Retrieves devices with their full nested detail (system, OS, network, and policy information) in one call, avoiding a Get Device per row.",
+      "category": "investigation",
+      "annotation": "get_devices_detailed",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Filter",
+          "name": "device_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+          "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        }
+      ],
+      "output_schema": {
+        "count": "",
+        "devices": [
+          {
+            "id": "",
+            "parentDeviceId": "",
+            "organizationId": "",
+            "locationId": "",
+            "nodeClass": "",
+            "nodeRoleId": "",
+            "policyId": "",
+            "approvalStatus": "",
+            "offline": "",
+            "displayName": "",
+            "systemName": "",
+            "dnsName": "",
+            "lastContact": "",
+            "lastUpdate": "",
+            "created": "",
+            "system": {
+              "name": "",
+              "manufacturer": "",
+              "model": "",
+              "serialNumber": "",
+              "domain": "",
+              "totalPhysicalMemory": ""
+            },
+            "os": {
+              "manufacturer": "",
+              "name": "",
+              "architecture": "",
+              "buildNumber": "",
+              "lastBootTime": ""
+            },
+            "ipAddresses": [],
+            "macAddresses": []
+          }
+        ]
+      }
+    },
+    {
+      "operation": "search_devices",
+      "title": "Search Devices",
+      "description": "Finds devices by free-text query across name, logged-on user, and IP address. This is how you turn a hostname from an alert into the numeric device ID every other device operation needs.",
+      "category": "investigation",
+      "annotation": "search_devices",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Search Query",
+          "name": "query",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Free text to match against device name, logged-on user, or IP address.",
+          "description": "Free text to match against device name, logged-on user, or IP address."
+        },
+        {
+          "title": "Limit",
+          "name": "limit",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 50,
+          "tooltip": "Maximum number of matches to return.",
+          "description": "Maximum number of matches to return."
+        }
+      ],
+      "output_schema": {
+        "devices": [
+          {
+            "id": "",
+            "name": "",
+            "nodeClass": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "get_device",
+      "title": "Get Device Details",
+      "description": "Retrieves the full record for a single device.",
+      "category": "investigation",
+      "annotation": "get_device",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "parentDeviceId": "",
+        "organizationId": "",
+        "locationId": "",
+        "nodeClass": "",
+        "nodeRoleId": "",
+        "policyId": "",
+        "approvalStatus": "",
+        "offline": "",
+        "displayName": "",
+        "systemName": "",
+        "dnsName": "",
+        "lastContact": "",
+        "lastUpdate": "",
+        "created": "",
+        "system": {
+          "name": "",
+          "manufacturer": "",
+          "model": "",
+          "serialNumber": "",
+          "domain": "",
+          "totalPhysicalMemory": ""
+        },
+        "os": {
+          "manufacturer": "",
+          "name": "",
+          "architecture": "",
+          "buildNumber": "",
+          "lastBootTime": ""
+        },
+        "ipAddresses": [],
+        "macAddresses": []
+      }
+    },
+    {
+      "operation": "update_device",
+      "title": "Update Device",
+      "description": "Changes a device's display name, assigned policy, role, organization, location, or custom attributes.",
+      "category": "remediation",
+      "annotation": "update_device",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Display Name",
+          "name": "display_name",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "New user-assigned display name.",
+          "description": "New user-assigned display name."
+        },
+        {
+          "title": "Policy ID",
+          "name": "policy_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Policy to assign. Overrides the organization policy mapping; clear it to revert to the organization default.",
+          "description": "Policy to assign. Overrides the organization policy mapping; clear it to revert to the organization default."
+        },
+        {
+          "title": "Node Role ID",
+          "name": "node_role_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Device role to assign.",
+          "description": "Device role to assign."
+        },
+        {
+          "title": "Organization ID",
+          "name": "organization_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Move the device to this organization.",
+          "description": "Move the device to this organization."
+        },
+        {
+          "title": "Location ID",
+          "name": "location_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Move the device to this location.",
+          "description": "Move the device to this location."
+        },
+        {
+          "title": "Custom Attributes",
+          "name": "user_data",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Custom attributes to set, as a JSON object.",
+          "description": "Custom attributes to set, as a JSON object."
+        },
+        {
+          "title": "Additional Fields",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Any other body fields, as a JSON object. Merged into the request, so this reaches fields the form above does not expose.",
+          "description": "Any other body fields, as a JSON object. Merged into the request, so this reaches fields the form above does not expose."
+        }
+      ],
+      "output_schema": {
+        "status": ""
+      }
+    },
+    {
+      "operation": "get_device_custom_fields",
+      "title": "Get Device Custom Fields",
+      "description": "Retrieves the custom field values set on a device.",
+      "category": "investigation",
+      "annotation": "get_device_custom_fields",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "With Inheritance",
+          "name": "with_inheritance",
+          "type": "checkbox",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": false,
+          "tooltip": "Resolve values through the definition scope hierarchy rather than returning only values set directly on the device.",
+          "description": "Resolve values through the definition scope hierarchy rather than returning only values set directly on the device."
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "update_device_custom_fields",
+      "title": "Update Device Custom Fields",
+      "description": "Sets custom field values on a device. Useful for writing a FortiSOAR record ID or remediation state back onto the endpoint.",
+      "category": "remediation",
+      "annotation": "update_device_custom_fields",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Field Values",
+          "name": "fields",
+          "type": "json",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "JSON object of field name to value, e.g. {\"soarTicket\": \"IR-1043\"}.",
+          "description": "JSON object of field name to value, e.g. {\"soarTicket\": \"IR-1043\"}."
+        }
+      ],
+      "output_schema": {
+        "status": ""
+      }
+    },
+    {
+      "operation": "get_device_dashboard_url",
+      "title": "Get Device Dashboard URL",
+      "description": "Returns a deep link to the device in the NinjaOne console, for attaching to an alert or a case note.",
+      "category": "investigation",
+      "annotation": "get_device_dashboard_url",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": {
+        "url": ""
+      }
+    },
+    {
+      "operation": "get_device_software",
+      "title": "Get Device Software Inventory",
+      "description": "Lists the software installed on a device. This is the \"does this vulnerable product exist here?\" lookup.",
+      "category": "investigation",
+      "annotation": "get_device_software",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": [
+        {
+          "name": "",
+          "publisher": "",
+          "version": "",
+          "installDate": "",
+          "productCode": ""
+        }
+      ]
+    },
+    {
+      "operation": "get_device_disks",
+      "title": "Get Device Disks",
+      "description": "Lists the physical disk drives on a device, with SMART health where available.",
+      "category": "investigation",
+      "annotation": "get_device_disks",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "get_device_volumes",
+      "title": "Get Device Volumes",
+      "description": "Lists storage volumes on a device, optionally including BitLocker encryption status.",
+      "category": "investigation",
+      "annotation": "get_device_volumes",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Include BitLocker Status",
+          "name": "include_bitlocker",
+          "type": "checkbox",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": false,
+          "tooltip": "Include BitLocker encryption status for each volume.",
+          "description": "Include BitLocker encryption status for each volume."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "get_device_processors",
+      "title": "Get Device Processors",
+      "description": "Lists the processors installed in a device.",
+      "category": "investigation",
+      "annotation": "get_device_processors",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "get_device_network_interfaces",
+      "title": "Get Device Network Interfaces",
+      "description": "Lists the network interfaces on a device, with addresses and link state.",
+      "category": "investigation",
+      "annotation": "get_device_network_interfaces",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "get_device_last_logged_on_user",
+      "title": "Get Last Logged-On User",
+      "description": "Returns the most recent interactive user on a device -- the person to contact about an alert or a reboot.",
+      "category": "investigation",
+      "annotation": "get_device_last_logged_on_user",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "get_device_windows_services",
+      "title": "Get Windows Services",
+      "description": "Lists Windows services on a device, optionally filtered by name or state.",
+      "category": "investigation",
+      "annotation": "get_device_windows_services",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Service Name",
+          "name": "name",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Filter to services matching this name.",
+          "description": "Filter to services matching this name."
+        },
+        {
+          "title": "State",
+          "name": "state",
+          "type": "select",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "STOPPED",
+            "START_PENDING",
+            "RUNNING",
+            "STOP_PENDING",
+            "PAUSE_PENDING",
+            "PAUSED",
+            "CONTINUE_PENDING"
+          ],
+          "tooltip": "Filter to services in this state.",
+          "description": "Filter to services in this state."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "get_software_inventory_report",
+      "title": "Get Software Inventory Report",
+      "description": "Estate-wide software inventory across every device matching the filter, rather than one device at a time. Pages automatically.",
+      "category": "investigation",
+      "annotation": "get_software_inventory_report",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Filter",
+          "name": "device_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+          "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+        },
+        {
+          "title": "Product Name Contains",
+          "name": "name_contains",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Case-insensitive substring match on the product name.",
+          "description": "Case-insensitive substring match on the product name, applied after the results are fetched. Use it to turn an advisory's product name into \"which of our endpoints run this?\"."
+        },
+        {
+          "title": "Installed After",
+          "name": "installed_after",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only include patches installed after this time.",
+          "description": "Only include patches installed after this time."
+        },
+        {
+          "title": "Installed Before",
+          "name": "installed_before",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only include patches installed before this time.",
+          "description": "Only include patches installed before this time."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        }
+      ],
+      "output_schema": {
+        "count": "",
+        "cursor": {},
+        "results": []
+      }
+    },
+    {
+      "operation": "get_device_health_report",
+      "title": "Get Device Health Report",
+      "description": "Estate-wide device health report, for triaging which endpoints are unhealthy before acting on them.",
+      "category": "investigation",
+      "annotation": "get_device_health_report",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Filter",
+          "name": "device_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+          "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+        },
+        {
+          "title": "Health Status",
+          "name": "health",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Filter to a health status, e.g. \"HEALTHY\" or \"UNHEALTHY\".",
+          "description": "Filter to a health status, e.g. \"HEALTHY\" or \"UNHEALTHY\"."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        }
+      ],
+      "output_schema": {
+        "count": "",
+        "cursor": {},
+        "results": []
+      }
+    },
+    {
+      "operation": "get_device_pending_os_patches",
+      "title": "Get Device Pending OS Patches",
+      "description": "Lists pending, failed, and rejected operating system patches for one device.",
+      "category": "investigation",
+      "annotation": "get_device_pending_os_patches",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "MANUAL",
+            "APPROVED",
+            "FAILED",
+            "REJECTED"
+          ],
+          "tooltip": "Filter to these patch statuses.",
+          "description": "Filter to these patch statuses."
+        },
+        {
+          "title": "Severity",
+          "name": "severity",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "LOW",
+            "MODERATE",
+            "IMPORTANT",
+            "CRITICAL",
+            "OPTIONAL"
+          ],
+          "tooltip": "Filter to these severities.",
+          "description": "Filter to these severities."
+        },
+        {
+          "title": "Type",
+          "name": "type",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "PATCH",
+            "INSTALLER"
+          ],
+          "tooltip": "Filter to these patch types.",
+          "description": "Filter to these patch types."
+        }
+      ],
+      "output_schema": [
+        {
+          "deviceId": "",
+          "id": "",
+          "kbNumber": "",
+          "title": "",
+          "severity": "",
+          "status": "",
+          "type": "",
+          "cveIds": [],
+          "timestamp": ""
+        }
+      ]
+    },
+    {
+      "operation": "get_device_installed_os_patches",
+      "title": "Get Device Installed OS Patches",
+      "description": "OS patch installation history for one device -- what landed, what failed, and when. Use it to prove a remediation actually took.",
+      "category": "investigation",
+      "annotation": "get_device_installed_os_patches",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "INSTALLED",
+            "FAILED"
+          ],
+          "tooltip": "Filter to these statuses.",
+          "description": "Filter to these statuses."
+        },
+        {
+          "title": "Installed After",
+          "name": "installed_after",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only include patches installed after this time.",
+          "description": "Only include patches installed after this time."
+        },
+        {
+          "title": "Installed Before",
+          "name": "installed_before",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only include patches installed before this time.",
+          "description": "Only include patches installed before this time."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "get_device_pending_software_patches",
+      "title": "Get Device Pending Software Patches",
+      "description": "Lists pending, failed, and rejected third-party software patches for one device.",
+      "category": "investigation",
+      "annotation": "get_device_pending_software_patches",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "MANUAL",
+            "APPROVED",
+            "FAILED",
+            "REJECTED"
+          ],
+          "tooltip": "Filter to these patch statuses.",
+          "description": "Filter to these patch statuses."
+        },
+        {
+          "title": "Impact",
+          "name": "impact",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "OPTIONAL",
+            "RECOMMENDED",
+            "CRITICAL"
+          ],
+          "tooltip": "Filter to these impact levels.",
+          "description": "Filter to these impact levels."
+        },
+        {
+          "title": "Type",
+          "name": "type",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "PATCH",
+            "INSTALLER"
+          ],
+          "tooltip": "Filter to these patch types.",
+          "description": "Filter to these patch types."
+        },
+        {
+          "title": "Product Identifier",
+          "name": "product_identifier",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict to a single product, as listed by Get Software Products.",
+          "description": "Restrict to a single product, as listed by Get Software Products."
+        }
+      ],
+      "output_schema": [
+        {
+          "deviceId": "",
+          "productIdentifier": "",
+          "patchId": "",
+          "name": "",
+          "productName": "",
+          "version": "",
+          "impact": "",
+          "status": "",
+          "type": "",
+          "timestamp": ""
+        }
+      ]
+    },
+    {
+      "operation": "get_device_installed_software_patches",
+      "title": "Get Device Installed Software Patches",
+      "description": "Third-party software patch history for one device.",
+      "category": "investigation",
+      "annotation": "get_device_installed_software_patches",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "INSTALLED",
+            "FAILED"
+          ],
+          "tooltip": "Filter to these statuses.",
+          "description": "Filter to these statuses."
+        },
+        {
+          "title": "Impact",
+          "name": "impact",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "OPTIONAL",
+            "RECOMMENDED",
+            "CRITICAL"
+          ],
+          "tooltip": "Filter to these impact levels.",
+          "description": "Filter to these impact levels."
+        },
+        {
+          "title": "Type",
+          "name": "type",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "PATCH",
+            "INSTALLER"
+          ],
+          "tooltip": "Filter to these patch types.",
+          "description": "Filter to these patch types."
+        },
+        {
+          "title": "Product Identifier",
+          "name": "product_identifier",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict to a single product.",
+          "description": "Restrict to a single product."
+        },
+        {
+          "title": "Installed After",
+          "name": "installed_after",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only include patches installed after this time.",
+          "description": "Only include patches installed after this time."
+        },
+        {
+          "title": "Installed Before",
+          "name": "installed_before",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only include patches installed before this time.",
+          "description": "Only include patches installed before this time."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "get_pending_os_patches_report",
+      "title": "Get Pending OS Patches Report",
+      "description": "Estate-wide pending, failed, and rejected OS patches across every device matching the filter. Pages automatically.",
+      "category": "investigation",
+      "annotation": "get_pending_os_patches_report",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Filter",
+          "name": "device_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+          "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "MANUAL",
+            "APPROVED",
+            "FAILED",
+            "REJECTED"
+          ],
+          "tooltip": "Filter to these patch statuses.",
+          "description": "Filter to these patch statuses."
+        },
+        {
+          "title": "Severity",
+          "name": "severity",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "LOW",
+            "MODERATE",
+            "IMPORTANT",
+            "CRITICAL",
+            "OPTIONAL"
+          ],
+          "tooltip": "Filter to these severities.",
+          "description": "Filter to these severities."
+        },
+        {
+          "title": "Type",
+          "name": "type",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "PATCH",
+            "INSTALLER"
+          ],
+          "tooltip": "Filter to these patch types.",
+          "description": "Filter to these patch types."
+        },
+        {
+          "title": "Timestamp Filter",
+          "name": "timestamp_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne monitoring timestamp filter (\"ts\" syntax).",
+          "description": "NinjaOne monitoring timestamp filter (\"ts\" syntax)."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        }
+      ],
+      "output_schema": {
+        "count": "",
+        "cursor": {},
+        "results": [
+          {
+            "deviceId": "",
+            "id": "",
+            "kbNumber": "",
+            "title": "",
+            "severity": "",
+            "status": "",
+            "type": "",
+            "cveIds": [],
+            "timestamp": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "get_pending_software_patches_report",
+      "title": "Get Pending Software Patches Report",
+      "description": "Estate-wide pending, failed, and rejected third-party software patches. This is the \"who else is exposed?\" query for a product-specific advisory.",
+      "category": "investigation",
+      "annotation": "get_pending_software_patches_report",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Filter",
+          "name": "device_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+          "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "MANUAL",
+            "APPROVED",
+            "FAILED",
+            "REJECTED"
+          ],
+          "tooltip": "Filter to these patch statuses.",
+          "description": "Filter to these patch statuses."
+        },
+        {
+          "title": "Impact",
+          "name": "impact",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "OPTIONAL",
+            "RECOMMENDED",
+            "CRITICAL"
+          ],
+          "tooltip": "Filter to these impact levels.",
+          "description": "Filter to these impact levels."
+        },
+        {
+          "title": "Type",
+          "name": "type",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "PATCH",
+            "INSTALLER"
+          ],
+          "tooltip": "Filter to these patch types.",
+          "description": "Filter to these patch types."
+        },
+        {
+          "title": "Product Identifier",
+          "name": "product_identifier",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict to a single product, as listed by Get Software Products.",
+          "description": "Restrict to a single product, as listed by Get Software Products."
+        },
+        {
+          "title": "Timestamp Filter",
+          "name": "timestamp_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne monitoring timestamp filter (\"ts\" syntax).",
+          "description": "NinjaOne monitoring timestamp filter (\"ts\" syntax)."
+        },
+        {
+          "title": "Product Name Contains",
+          "name": "name_contains",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Case-insensitive substring match on the product name.",
+          "description": "Case-insensitive substring match on the product name, applied after the results are fetched. Use it to turn an advisory's product name into \"which of our endpoints run this?\"."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        }
+      ],
+      "output_schema": {
+        "count": "",
+        "cursor": {},
+        "results": [
+          {
+            "deviceId": "",
+            "productIdentifier": "",
+            "patchId": "",
+            "name": "",
+            "productName": "",
+            "version": "",
+            "impact": "",
+            "status": "",
+            "type": "",
+            "timestamp": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "scan_os_patches",
+      "title": "Scan OS Patches",
+      "description": "Triggers an operating system patch scan on a device so its pending-patch list is refreshed before you read it.",
+      "category": "remediation",
+      "annotation": "scan_os_patches",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "device_id": "",
+        "action": "",
+        "message": ""
+      }
+    },
+    {
+      "operation": "apply_os_patches",
+      "title": "Apply OS Patches",
+      "description": "Triggers installation of approved operating system patches on a device. NinjaOne returns no job identifier, so poll Get Device Jobs or re-read the pending list to confirm completion.",
+      "category": "remediation",
+      "annotation": "apply_os_patches",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "device_id": "",
+        "action": "",
+        "message": ""
+      }
+    },
+    {
+      "operation": "scan_software_patches",
+      "title": "Scan Software Patches",
+      "description": "Triggers a third-party software patch scan on a device.",
+      "category": "remediation",
+      "annotation": "scan_software_patches",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "device_id": "",
+        "action": "",
+        "message": ""
+      }
+    },
+    {
+      "operation": "apply_software_patches",
+      "title": "Apply Software Patches",
+      "description": "Triggers installation of approved third-party software patches on a device. This is the actual remediation step for a vulnerable application.",
+      "category": "remediation",
+      "annotation": "apply_software_patches",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "device_id": "",
+        "action": "",
+        "message": ""
+      }
+    },
+    {
+      "operation": "run_script",
+      "title": "Run Script",
+      "description": "Runs a saved automation script, or a built-in action, on a device. Supply exactly one of Script ID or Action UID -- NinjaOne rejects both together.",
+      "category": "remediation",
+      "annotation": "run_script",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Script ID",
+          "name": "script_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric ID of a script from the automation library, as listed by Get Automation Scripts.",
+          "description": "Numeric ID of a script from the automation library, as listed by Get Automation Scripts."
+        },
+        {
+          "title": "Action UID",
+          "name": "action_uid",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "String UID of a built-in action. Use instead of Script ID, never alongside it.",
+          "description": "String UID of a built-in action. Use instead of Script ID, never alongside it."
+        },
+        {
+          "title": "Parameters",
+          "name": "parameters",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Command-line parameters passed to the script or action.",
+          "description": "Command-line parameters passed to the script or action."
+        },
+        {
+          "title": "Run As",
+          "name": "run_as",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Credential role to run under, e.g. \"system\" or \"loggedonuser\".",
+          "description": "Credential role to run under, e.g. \"system\" or \"loggedonuser\"."
+        }
+      ],
+      "output_schema": {
+        "jobUid": ""
+      }
+    },
+    {
+      "operation": "get_automation_scripts",
+      "title": "Get Automation Scripts",
+      "description": "Lists the automation scripts available in the tenant, with the IDs that Run Script takes.",
+      "category": "investigation",
+      "annotation": "get_automation_scripts",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Language",
+          "name": "language",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Language tag for localized names.",
+          "description": "Language tag for localized names."
+        }
+      ],
+      "output_schema": [
+        {
+          "id": "",
+          "name": "",
+          "description": "",
+          "language": "",
+          "operatingSystems": []
+        }
+      ]
+    },
+    {
+      "operation": "get_scripting_options",
+      "title": "Get Device Scripting Options",
+      "description": "Lists the scripts, built-in actions, and credential roles that are valid for one specific device.",
+      "category": "investigation",
+      "annotation": "get_scripting_options",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Language",
+          "name": "language",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Language tag for localized names.",
+          "description": "Language tag for localized names."
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "reboot_device",
+      "title": "Reboot Device",
+      "description": "Reboots a device, either gracefully or forcibly.",
+      "category": "remediation",
+      "annotation": "reboot_device",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Reboot Mode",
+          "name": "mode",
+          "type": "select",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "NORMAL",
+            "FORCED"
+          ],
+          "value": "NORMAL",
+          "tooltip": "NORMAL asks the operating system to reboot cleanly. FORCED does not wait for applications to close and can lose unsaved work.",
+          "description": "NORMAL asks the operating system to reboot cleanly. FORCED does not wait for applications to close and can lose unsaved work."
+        },
+        {
+          "title": "Reason",
+          "name": "reason",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Reason recorded against the reboot in the device activity log.",
+          "description": "Reason recorded against the reboot in the device activity log."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "device_id": "",
+        "mode": ""
+      }
+    },
+    {
+      "operation": "control_windows_service",
+      "title": "Control Windows Service",
+      "description": "Starts, stops, pauses, or restarts a Windows service on a device.",
+      "category": "remediation",
+      "annotation": "control_windows_service",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Service ID",
+          "name": "service_id",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Service identifier, as returned by Get Windows Services.",
+          "description": "Service identifier, as returned by Get Windows Services."
+        },
+        {
+          "title": "Action",
+          "name": "action",
+          "type": "select",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "START",
+            "PAUSE",
+            "STOP",
+            "RESTART"
+          ],
+          "tooltip": "Action to take on the service.",
+          "description": "Action to take on the service."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "device_id": "",
+        "service_id": "",
+        "action": ""
+      }
+    },
+    {
+      "operation": "schedule_maintenance",
+      "title": "Schedule Maintenance",
+      "description": "Suppresses monitoring on a device for a window. End Time is mandatory -- NinjaOne has no open-ended maintenance mode.",
+      "category": "remediation",
+      "annotation": "schedule_maintenance",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "End Time",
+          "name": "end_time",
+          "type": "datetime",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "When the maintenance window ends. Required.",
+          "description": "When the maintenance window ends. Required."
+        },
+        {
+          "title": "Start Time",
+          "name": "start_time",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "When the maintenance window begins. Defaults to now.",
+          "description": "When the maintenance window begins. Defaults to now."
+        },
+        {
+          "title": "Disabled Features",
+          "name": "disabled_features",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Features to suspend during the window, comma-separated, e.g. \"ALERTS,PATCHING,AVSCANS,TASKS\".",
+          "description": "Features to suspend during the window, comma-separated, e.g. \"ALERTS,PATCHING,AVSCANS,TASKS\"."
+        },
+        {
+          "title": "Reason",
+          "name": "reason",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Reason recorded for the window.",
+          "description": "Reason recorded for the window."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "device_id": "",
+        "end": ""
+      }
+    },
+    {
+      "operation": "cancel_maintenance",
+      "title": "Cancel Maintenance",
+      "description": "Ends an active maintenance window on a device and resumes monitoring.",
+      "category": "remediation",
+      "annotation": "cancel_maintenance",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "device_id": ""
+      }
+    },
+    {
+      "operation": "get_jobs",
+      "title": "Get Active Jobs",
+      "description": "Lists jobs currently running across the estate -- the way to see whether a patch apply or script run is still in flight.",
+      "category": "investigation",
+      "annotation": "get_jobs",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Job Type",
+          "name": "job_type",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Filter to these job types, comma-separated.",
+          "description": "Filter to these job types, comma-separated."
+        },
+        {
+          "title": "Device Filter",
+          "name": "device_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+          "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+        },
+        {
+          "title": "Time Zone",
+          "name": "timezone",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "IANA time zone for rendered timestamps.",
+          "description": "IANA time zone used to render timestamps, e.g. \"America/Los_Angeles\". Defaults to the tenant setting."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "get_device_jobs",
+      "title": "Get Device Jobs",
+      "description": "Lists jobs currently running on one device. Poll this after Apply Patches or Run Script, which return no job identifier of their own.",
+      "category": "investigation",
+      "annotation": "get_device_jobs",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Time Zone",
+          "name": "timezone",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "IANA time zone for rendered timestamps.",
+          "description": "IANA time zone used to render timestamps, e.g. \"America/Los_Angeles\". Defaults to the tenant setting."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "get_alerts",
+      "title": "Get Alerts",
+      "description": "Lists active alerts (triggered conditions) across the estate.",
+      "category": "investigation",
+      "annotation": "get_alerts",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Filter",
+          "name": "device_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+          "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+        },
+        {
+          "title": "Source Type",
+          "name": "source_type",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Filter to alerts from this source type, e.g. \"CONDITION\".",
+          "description": "Filter to alerts from this source type, e.g. \"CONDITION\"."
+        },
+        {
+          "title": "Time Zone",
+          "name": "timezone",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "IANA time zone for rendered timestamps.",
+          "description": "IANA time zone used to render timestamps, e.g. \"America/Los_Angeles\". Defaults to the tenant setting."
+        }
+      ],
+      "output_schema": [
+        {
+          "uid": "",
+          "deviceId": "",
+          "message": "",
+          "sourceType": "",
+          "severity": "",
+          "createTime": ""
+        }
+      ]
+    },
+    {
+      "operation": "get_device_alerts",
+      "title": "Get Device Alerts",
+      "description": "Lists active alerts for one device.",
+      "category": "investigation",
+      "annotation": "get_device_alerts",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Time Zone",
+          "name": "timezone",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "IANA time zone for rendered timestamps.",
+          "description": "IANA time zone used to render timestamps, e.g. \"America/Los_Angeles\". Defaults to the tenant setting."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "reset_alert",
+      "title": "Reset Alert",
+      "description": "Clears a triggered condition. Supplying Activity Data records that data on the resulting activity entry, which is how you write a FortiSOAR case reference back into NinjaOne.",
+      "category": "remediation",
+      "annotation": "reset_alert",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Alert UID",
+          "name": "alert_uid",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "UID of the alert to reset, as returned by Get Alerts.",
+          "description": "UID of the alert to reset, as returned by Get Alerts."
+        },
+        {
+          "title": "Activity Data",
+          "name": "activity_data",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Optional JSON object recorded against the reset activity.",
+          "description": "Optional JSON object recorded against the reset activity."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "alert_uid": ""
+      }
+    },
+    {
+      "operation": "get_activities",
+      "title": "Get Activities",
+      "description": "Retrieves the activity log across the estate, filtered by class, type, status, time window, or device.",
+      "category": "investigation",
+      "annotation": "get_activities",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Activity Class",
+          "name": "activity_class",
+          "type": "select",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "ALL",
+            "SYSTEM",
+            "DEVICE",
+            "USER"
+          ],
+          "value": "ALL",
+          "tooltip": "Restrict to system, device, or user activities.",
+          "description": "Restrict to system, device, or user activities."
+        },
+        {
+          "title": "Device Filter",
+          "name": "device_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+          "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+        },
+        {
+          "title": "Activity Type",
+          "name": "type",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict to this activity type.",
+          "description": "Restrict to this activity type."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict to these statuses, comma-separated.",
+          "description": "Restrict to these statuses, comma-separated."
+        },
+        {
+          "title": "User",
+          "name": "user",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict to these users, comma-separated.",
+          "description": "Restrict to these users, comma-separated."
+        },
+        {
+          "title": "Alert Series UID",
+          "name": "series_uid",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict to activities belonging to one alert series.",
+          "description": "Restrict to activities belonging to one alert series."
+        },
+        {
+          "title": "Start Time",
+          "name": "start_time",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only activities recorded at or after this time.",
+          "description": "Only activities recorded at or after this time."
+        },
+        {
+          "title": "End Time",
+          "name": "end_time",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only activities recorded at or before this time.",
+          "description": "Only activities recorded at or before this time."
+        },
+        {
+          "title": "Newer Than Activity ID",
+          "name": "newer_than",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only activities with an ID greater than this. The reliable cursor for polling, since it cannot skip entries that share a timestamp.",
+          "description": "Only activities with an ID greater than this. The reliable cursor for polling, since it cannot skip entries that share a timestamp."
+        },
+        {
+          "title": "Older Than Activity ID",
+          "name": "older_than",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only activities with an ID lower than this.",
+          "description": "Only activities with an ID lower than this."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        },
+        {
+          "title": "Time Zone",
+          "name": "timezone",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "IANA time zone for rendered timestamps.",
+          "description": "IANA time zone used to render timestamps, e.g. \"America/Los_Angeles\". Defaults to the tenant setting."
+        }
+      ],
+      "output_schema": {
+        "lastActivityId": "",
+        "activities": [
+          {
+            "id": "",
+            "activityTime": "",
+            "deviceId": "",
+            "activityType": "",
+            "statusCode": "",
+            "message": "",
+            "seriesUid": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "get_device_activities",
+      "title": "Get Device Activities",
+      "description": "Retrieves the activity log for one device -- the audit trail of what NinjaOne did to it and when.",
+      "category": "investigation",
+      "annotation": "get_device_activities",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric NinjaOne device ID. Search Devices resolves a hostname to it.",
+          "description": "Numeric NinjaOne device identifier. Use Search Devices to resolve a hostname, IP, or logged-on user to this ID."
+        },
+        {
+          "title": "Activity Type",
+          "name": "type",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict to this activity type.",
+          "description": "Restrict to this activity type."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict to these statuses, comma-separated.",
+          "description": "Restrict to these statuses, comma-separated."
+        },
+        {
+          "title": "Alert Series UID",
+          "name": "series_uid",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict to activities belonging to one alert series.",
+          "description": "Restrict to activities belonging to one alert series."
+        },
+        {
+          "title": "Start Time",
+          "name": "start_time",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only activities recorded at or after this time.",
+          "description": "Only activities recorded at or after this time."
+        },
+        {
+          "title": "End Time",
+          "name": "end_time",
+          "type": "datetime",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only activities recorded at or before this time.",
+          "description": "Only activities recorded at or before this time."
+        },
+        {
+          "title": "Newer Than Activity ID",
+          "name": "newer_than",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only activities with an ID greater than this.",
+          "description": "Only activities with an ID greater than this."
+        },
+        {
+          "title": "Older Than Activity ID",
+          "name": "older_than",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Only activities with an ID lower than this.",
+          "description": "Only activities with an ID lower than this."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        },
+        {
+          "title": "Time Zone",
+          "name": "timezone",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "IANA time zone for rendered timestamps.",
+          "description": "IANA time zone used to render timestamps, e.g. \"America/Los_Angeles\". Defaults to the tenant setting."
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "get_organizations",
+      "title": "Get Organizations",
+      "description": "Lists the organizations (tenants) in NinjaOne.",
+      "category": "investigation",
+      "annotation": "get_organizations",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Organization Filter",
+          "name": "organization_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne organization filter (\"of\" syntax).",
+          "description": "NinjaOne organization filter (\"of\" syntax)."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        }
+      ],
+      "output_schema": {
+        "count": "",
+        "organizations": [
+          {
+            "id": "",
+            "name": "",
+            "description": "",
+            "nodeApprovalMode": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "get_organization",
+      "title": "Get Organization",
+      "description": "Retrieves a single organization by ID.",
+      "category": "investigation",
+      "annotation": "get_organization",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Organization ID",
+          "name": "organization_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric organization identifier.",
+          "description": "Numeric organization identifier."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "description": ""
+      }
+    },
+    {
+      "operation": "get_organization_devices",
+      "title": "Get Organization Devices",
+      "description": "Lists every device belonging to one organization. Pages automatically.",
+      "category": "investigation",
+      "annotation": "get_organization_devices",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Organization ID",
+          "name": "organization_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric organization identifier.",
+          "description": "Numeric organization identifier."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        }
+      ],
+      "output_schema": {
+        "count": "",
+        "organization_id": "",
+        "devices": [
+          {
+            "id": "",
+            "parentDeviceId": "",
+            "organizationId": "",
+            "locationId": "",
+            "nodeClass": "",
+            "nodeRoleId": "",
+            "policyId": "",
+            "approvalStatus": "",
+            "offline": "",
+            "displayName": "",
+            "systemName": "",
+            "dnsName": "",
+            "lastContact": "",
+            "lastUpdate": "",
+            "created": "",
+            "system": {
+              "name": "",
+              "manufacturer": "",
+              "model": "",
+              "serialNumber": "",
+              "domain": "",
+              "totalPhysicalMemory": ""
+            },
+            "os": {
+              "manufacturer": "",
+              "name": "",
+              "architecture": "",
+              "buildNumber": "",
+              "lastBootTime": ""
+            },
+            "ipAddresses": [],
+            "macAddresses": []
+          }
+        ]
+      }
+    },
+    {
+      "operation": "get_organization_locations",
+      "title": "Get Organization Locations",
+      "description": "Lists the locations configured for an organization.",
+      "category": "investigation",
+      "annotation": "get_organization_locations",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Organization ID",
+          "name": "organization_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric organization identifier.",
+          "description": "Numeric organization identifier."
+        }
+      ],
+      "output_schema": [
+        {
+          "id": "",
+          "name": "",
+          "organizationId": "",
+          "address": ""
+        }
+      ]
+    },
+    {
+      "operation": "get_groups",
+      "title": "Get Groups",
+      "description": "Lists groups (saved device searches). A group is the usual way to express \"all servers\" or \"all laptops missing patches\" once and reuse it.",
+      "category": "investigation",
+      "annotation": "get_groups",
+      "enabled": true,
+      "parameters": [],
+      "output_schema": [
+        {
+          "id": "",
+          "name": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "operation": "get_group_devices",
+      "title": "Get Group Devices",
+      "description": "Returns the device IDs that currently match a group's saved search.",
+      "category": "investigation",
+      "annotation": "get_group_devices",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Group ID",
+          "name": "group_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric group identifier.",
+          "description": "Numeric group identifier."
+        }
+      ],
+      "output_schema": []
+    },
+    {
+      "operation": "get_policies",
+      "title": "Get Policies",
+      "description": "Lists the policies defined in the tenant, with the IDs that Update Device takes.",
+      "category": "investigation",
+      "annotation": "get_policies",
+      "enabled": true,
+      "parameters": [],
+      "output_schema": [
+        {
+          "id": "",
+          "name": "",
+          "description": "",
+          "nodeClass": ""
+        }
+      ]
+    },
+    {
+      "operation": "get_software_products",
+      "title": "Get Software Products",
+      "description": "Lists the third-party products NinjaOne can patch, with the product identifiers the software patch operations filter on.",
+      "category": "investigation",
+      "annotation": "get_software_products",
+      "enabled": true,
+      "parameters": [],
+      "output_schema": [
+        {
+          "id": "",
+          "vendorName": "",
+          "productName": "",
+          "installable": ""
+        }
+      ]
+    },
+    {
+      "operation": "generate_installer",
+      "title": "Generate Agent Installer",
+      "description": "Mints a pre-tokenized agent installer download link for an organization and location. This is how a device gets enrolled from a playbook: the URL already carries the organization and location, so nothing has to be typed on the endpoint.",
+      "category": "remediation",
+      "annotation": "generate_installer",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Organization ID",
+          "name": "organization_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Organization the enrolled device will belong to.",
+          "description": "Organization the enrolled device will belong to."
+        },
+        {
+          "title": "Location ID",
+          "name": "location_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Location within that organization, as listed by Get Organization Locations.",
+          "description": "Location within that organization, as listed by Get Organization Locations."
+        },
+        {
+          "title": "Installer Type",
+          "name": "installer_type",
+          "type": "select",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "WINDOWS_MSI",
+            "WINDOWS_ARM64_MSI",
+            "MAC_DMG",
+            "MAC_PKG",
+            "LINUX_DEB",
+            "LINUX_RPM",
+            "LINUX_ARM64_DEB",
+            "LINUX_ARMV7A_DEB",
+            "LINUX_ARM64_RPM",
+            "LINUX_ARMV7A_RPM"
+          ],
+          "value": "WINDOWS_MSI",
+          "tooltip": "Agent package to build. WINDOWS_MSI for Windows guests; LINUX_RPM for a Rocky/RHEL host, LINUX_DEB for Debian/Ubuntu.",
+          "description": "Agent package to build. WINDOWS_MSI for Windows guests; LINUX_RPM for a Rocky/RHEL host, LINUX_DEB for Debian/Ubuntu."
+        },
+        {
+          "title": "Usage Limit",
+          "name": "usage_limit",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 1,
+          "tooltip": "How many times the link may be downloaded. The URL is a bearer credential for joining your tenant, so keep this at 1 for a single machine.",
+          "description": "How many times the link may be downloaded. The URL is a bearer credential for joining your tenant, so keep this at 1 for a single machine."
+        }
+      ],
+      "output_schema": {
+        "url": "",
+        "installerType": "",
+        "organizationId": "",
+        "locationId": ""
+      }
+    },
+    {
+      "operation": "create_ticket",
+      "title": "Create Ticket",
+      "description": "Creates a NinjaOne ticket, optionally linked to a device. Requires the Ninja Ticketing add-on to be enabled on the tenant.",
+      "category": "remediation",
+      "annotation": "create_ticket",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Organization ID",
+          "name": "organization_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Organization (client) the ticket belongs to.",
+          "description": "Organization (client) the ticket belongs to."
+        },
+        {
+          "title": "Ticket Form ID",
+          "name": "ticket_form_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Ticket form to create against, as listed by the ticketing configuration.",
+          "description": "Ticket form to create against, as listed by the ticketing configuration."
+        },
+        {
+          "title": "Subject",
+          "name": "subject",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Ticket subject line.",
+          "description": "Ticket subject line."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Ticket status, e.g. \"NEW\". Must be a status defined on the tenant.",
+          "description": "Ticket status, e.g. \"NEW\". Must be a status defined on the tenant."
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Ticket body. Sent as the description document.",
+          "description": "Ticket body. Sent as the description document."
+        },
+        {
+          "title": "Public Description",
+          "name": "public",
+          "type": "checkbox",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": false,
+          "tooltip": "Make the description visible to the end user rather than internal-only.",
+          "description": "Make the description visible to the end user rather than internal-only."
+        },
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Device to associate the ticket with.",
+          "description": "Device to associate the ticket with."
+        },
+        {
+          "title": "Location ID",
+          "name": "location_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Location for the ticket.",
+          "description": "Location for the ticket."
+        },
+        {
+          "title": "Type",
+          "name": "type",
+          "type": "select",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "PROBLEM",
+            "QUESTION",
+            "INCIDENT",
+            "TASK",
+            "CHANGE_REQUEST",
+            "SERVICE_REQUEST",
+            "PROJECT",
+            "APPOINTMENT",
+            "MISCELLANEOUS"
+          ],
+          "tooltip": "Ticket type.",
+          "description": "Ticket type."
+        },
+        {
+          "title": "Severity",
+          "name": "severity",
+          "type": "select",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "NONE",
+            "MINOR",
+            "MODERATE",
+            "MAJOR",
+            "CRITICAL"
+          ],
+          "tooltip": "Ticket severity.",
+          "description": "Ticket severity."
+        },
+        {
+          "title": "Priority",
+          "name": "priority",
+          "type": "select",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "NONE",
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ],
+          "tooltip": "Ticket priority.",
+          "description": "Ticket priority."
+        },
+        {
+          "title": "Assigned Technician ID",
+          "name": "assigned_user_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Technician to assign the ticket to.",
+          "description": "Technician to assign the ticket to."
+        },
+        {
+          "title": "Requester UID",
+          "name": "requester_uid",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "UID of the requesting contact or end user.",
+          "description": "UID of the requesting contact or end user."
+        },
+        {
+          "title": "Parent Ticket ID",
+          "name": "parent_ticket_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Parent ticket, to create this as a child.",
+          "description": "Parent ticket, to create this as a child."
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Tags to apply, comma-separated.",
+          "description": "Tags to apply, comma-separated."
+        },
+        {
+          "title": "Additional Fields",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Any other body fields, as a JSON object.",
+          "description": "Any other body fields, as a JSON object."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "version": "",
+        "clientId": "",
+        "ticketFormId": "",
+        "nodeId": "",
+        "subject": "",
+        "status": "",
+        "type": "",
+        "severity": "",
+        "priority": "",
+        "assignedAppUserId": "",
+        "requesterUid": "",
+        "tags": [],
+        "createTime": ""
+      }
+    },
+    {
+      "operation": "get_ticket",
+      "title": "Get Ticket",
+      "description": "Retrieves a ticket by ID, including the version number that Update Ticket needs.",
+      "category": "investigation",
+      "annotation": "get_ticket",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Ticket ID",
+          "name": "ticket_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric ticket identifier.",
+          "description": "Numeric ticket identifier."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "version": "",
+        "clientId": "",
+        "ticketFormId": "",
+        "nodeId": "",
+        "subject": "",
+        "status": "",
+        "type": "",
+        "severity": "",
+        "priority": "",
+        "assignedAppUserId": "",
+        "requesterUid": "",
+        "tags": [],
+        "createTime": ""
+      }
+    },
+    {
+      "operation": "update_ticket",
+      "title": "Update Ticket",
+      "description": "Changes fields on an existing ticket. NinjaOne's update endpoint is a full replace, so this operation reads the ticket first and layers your changes on top -- supply only the fields you want changed.",
+      "category": "remediation",
+      "annotation": "update_ticket",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Ticket ID",
+          "name": "ticket_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric ticket identifier.",
+          "description": "Numeric ticket identifier."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "New ticket status.",
+          "description": "New ticket status."
+        },
+        {
+          "title": "Subject",
+          "name": "subject",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "New subject line.",
+          "description": "New subject line."
+        },
+        {
+          "title": "Type",
+          "name": "type",
+          "type": "select",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "PROBLEM",
+            "QUESTION",
+            "INCIDENT",
+            "TASK",
+            "CHANGE_REQUEST",
+            "SERVICE_REQUEST",
+            "PROJECT",
+            "APPOINTMENT",
+            "MISCELLANEOUS"
+          ],
+          "tooltip": "New ticket type.",
+          "description": "New ticket type."
+        },
+        {
+          "title": "Severity",
+          "name": "severity",
+          "type": "select",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "NONE",
+            "MINOR",
+            "MODERATE",
+            "MAJOR",
+            "CRITICAL"
+          ],
+          "tooltip": "New severity.",
+          "description": "New severity."
+        },
+        {
+          "title": "Priority",
+          "name": "priority",
+          "type": "select",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "NONE",
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ],
+          "tooltip": "New priority.",
+          "description": "New priority."
+        },
+        {
+          "title": "Assigned Technician ID",
+          "name": "assigned_user_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Reassign to this technician.",
+          "description": "Reassign to this technician."
+        },
+        {
+          "title": "Location ID",
+          "name": "location_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "New location.",
+          "description": "New location."
+        },
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Associate with this device.",
+          "description": "Associate with this device."
+        },
+        {
+          "title": "Tags",
+          "name": "tags",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Replacement tags, comma-separated. Replaces the existing set.",
+          "description": "Replacement tags, comma-separated. Replaces the existing set."
+        },
+        {
+          "title": "Additional Fields",
+          "name": "additional_fields",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Any other body fields, as a JSON object. Applied last, so it overrides everything above.",
+          "description": "Any other body fields, as a JSON object. Applied last, so it overrides everything above."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "version": "",
+        "clientId": "",
+        "ticketFormId": "",
+        "nodeId": "",
+        "subject": "",
+        "status": "",
+        "type": "",
+        "severity": "",
+        "priority": "",
+        "assignedAppUserId": "",
+        "requesterUid": "",
+        "tags": [],
+        "createTime": ""
+      }
+    },
+    {
+      "operation": "add_ticket_comment",
+      "title": "Add Ticket Comment",
+      "description": "Appends a comment to a ticket, either internal or visible to the end user.",
+      "category": "remediation",
+      "annotation": "add_ticket_comment",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Ticket ID",
+          "name": "ticket_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric ticket identifier.",
+          "description": "Numeric ticket identifier."
+        },
+        {
+          "title": "Comment Body",
+          "name": "body",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Comment text.",
+          "description": "Comment text."
+        },
+        {
+          "title": "Public Comment",
+          "name": "public",
+          "type": "checkbox",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": false,
+          "tooltip": "Make the comment visible to the end user rather than internal-only.",
+          "description": "Make the comment visible to the end user rather than internal-only."
+        },
+        {
+          "title": "HTML Body",
+          "name": "html_body",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Optional HTML rendering of the comment.",
+          "description": "Optional HTML rendering of the comment."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "ticketId": ""
+      }
+    },
+    {
+      "operation": "get_tickets_by_board",
+      "title": "Get Tickets by Board",
+      "description": "Runs a ticketing board and returns the tickets it matches -- the way to list tickets, since NinjaOne has no flat ticket search.",
+      "category": "investigation",
+      "annotation": "get_tickets_by_board",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Board ID",
+          "name": "board_id",
+          "type": "integer",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Numeric board identifier.",
+          "description": "Numeric board identifier."
+        },
+        {
+          "title": "Search Criteria",
+          "name": "search",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Free-text search within the board.",
+          "description": "Free-text search within the board."
+        },
+        {
+          "title": "Filters",
+          "name": "filters",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Board filters, as a JSON array.",
+          "description": "Board filters, as a JSON array."
+        },
+        {
+          "title": "Sort By",
+          "name": "sort_by",
+          "type": "json",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Sort specification, as a JSON array.",
+          "description": "Sort specification, as a JSON array."
+        },
+        {
+          "title": "Include Columns",
+          "name": "include_columns",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Columns to return, comma-separated.",
+          "description": "Columns to return, comma-separated."
+        },
+        {
+          "title": "Last Cursor ID",
+          "name": "last_cursor_id",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Cursor from a previous page, to continue paging.",
+          "description": "Cursor from a previous page, to continue paging."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "fetch_patch_findings",
+      "title": "Fetch Patch Findings",
+      "description": "Pulls pending, failed, and rejected patches across the estate and normalizes OS and third-party patches into one flat finding shape, so a single playbook mapping covers both. This is the ingestion entry point.",
+      "category": "investigation",
+      "annotation": "fetch_patch_findings",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Patch Kind",
+          "name": "patch_kind",
+          "type": "select",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Both",
+            "Operating System",
+            "Third-Party Software"
+          ],
+          "value": "Both",
+          "tooltip": "Which patch sources to pull.",
+          "description": "Which patch sources to pull."
+        },
+        {
+          "title": "Device Filter",
+          "name": "device_filter",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "NinjaOne device filter (df syntax). Blank means the whole estate.",
+          "description": "NinjaOne device filter (the \"df\" syntax), e.g. \"org = 1\", \"class = WINDOWS_WORKSTATION\", or \"online = true\". Leave blank for the whole estate."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "MANUAL",
+            "APPROVED",
+            "FAILED",
+            "REJECTED"
+          ],
+          "tooltip": "Filter to these patch statuses.",
+          "description": "Filter to these patch statuses."
+        },
+        {
+          "title": "OS Severity",
+          "name": "severity",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "LOW",
+            "MODERATE",
+            "IMPORTANT",
+            "CRITICAL",
+            "OPTIONAL"
+          ],
+          "tooltip": "Severity filter, applied to operating system patches only.",
+          "description": "Severity filter, applied to operating system patches only."
+        },
+        {
+          "title": "Software Impact",
+          "name": "impact",
+          "type": "multiselect",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "UNKNOWN",
+            "OPTIONAL",
+            "RECOMMENDED",
+            "CRITICAL"
+          ],
+          "tooltip": "Impact filter, applied to third-party software patches only.",
+          "description": "Impact filter, applied to third-party software patches only."
+        },
+        {
+          "title": "Product Identifier",
+          "name": "product_identifier",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Restrict third-party results to a single product.",
+          "description": "Restrict third-party results to a single product."
+        },
+        {
+          "title": "Maximum Records",
+          "name": "max_records",
+          "type": "integer",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 200,
+          "tooltip": "Hard stop on records returned; the connector pages up to this many.",
+          "description": "Hard stop on the number of records returned. The connector pages until it reaches this many."
+        }
+      ],
+      "output_schema": {
+        "count": "",
+        "findings": [
+          {
+            "source_id": "",
+            "patch_kind": "",
+            "device_id": "",
+            "patch_id": "",
+            "kb_number": "",
+            "cve_ids": [],
+            "name": "",
+            "product": "",
+            "version": "",
+            "status": "",
+            "severity": "",
+            "type": "",
+            "impact": "",
+            "installed_at": "",
+            "timestamp": "",
+            "raw": {}
+          }
+        ]
+      }
+    }
+  ]
+}

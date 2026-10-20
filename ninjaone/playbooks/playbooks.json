@@ -1,0 +1,1787 @@
+{
+  "type": "workflow_collections",
+  "macros": [],
+  "exported_tags": [],
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - NinjaOne - 1.0.0",
+      "description": "Endpoint enrichment, exposure hunting, and gated patch remediation over the NinjaOne Public API v2.",
+      "visible": true,
+      "image": null,
+      "uuid": "5f1a009c-081c-5a54-8929-c68b24bd1eb5",
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "name": "NinjaOne - Enrich Asset",
+          "aliasName": null,
+          "tag": "",
+          "recordTags": [],
+          "description": "Resolve a hostname, IP, or logged-on user to a NinjaOne device and pull back its identity, owner, and a deep link to the console. This is the first step in almost every other flow, because every device operation takes the numeric NinjaOne device ID rather than a name.\n",
+          "isActive": true,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": 0,
+          "parameters": [
+            "hostname"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1792505497,
+          "collection": "/api/3/workflow_collections/5f1a009c-081c-5a54-8929-c68b24bd1eb5",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c7f12810-be7b-5341-a589-abaf02558b32",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "start",
+              "description": null,
+              "arguments": {
+                "inputVariables": [
+                  {
+                    "name": "hostname"
+                  },
+                  {
+                    "name": "hostname"
+                  }
+                ],
+                "title": "NinjaOne - Enrich Asset",
+                "resources": [
+                  "assets"
+                ],
+                "route": "07300e96-fb36-5fd6-b2cf-c03e149c7a38",
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "hostname": "{{vars.request.data[\"hostname\"]}}"
+                    },
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "triggerOnSource": true,
+                "triggerOnReplicate": false,
+                "noRecordExecution": true,
+                "singleRecordExecution": false,
+                "__triggerLimit": true,
+                "executeButtonText": "Execute",
+                "showToasterMessage": {
+                  "visible": false,
+                  "messageVisible": true
+                },
+                "displayConditions": {
+                  "assets": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "c7f12810-be7b-5341-a589-abaf02558b32"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Find Device",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "search_devices",
+                "config": "",
+                "params": {
+                  "query": "{{ vars.input.params.hostname }}",
+                  "limit": 5
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Search Devices",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "250",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "a0bd13ef-896f-50e2-bde6-2b1f3b8c69e3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Check Found",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "option": "found",
+                    "condition": "{{ vars.steps.Find_Device.data.devices | default([]) | length > 0 }}",
+                    "step_iri": "/api/3/workflow_steps/c819c60a-e920-5718-b51b-522b01088a66",
+                    "step_name": "Get Device Detail"
+                  },
+                  {
+                    "option": "not found",
+                    "condition": "{{ vars.steps.Find_Device.data.devices | default([]) | length == 0 }}",
+                    "step_iri": "/api/3/workflow_steps/240f8cda-f2a7-5e99-a67a-0af327c8305b",
+                    "step_name": "Not Managed"
+                  }
+                ]
+              },
+              "status": null,
+              "top": "380",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "group": null,
+              "uuid": "ceba0cdb-484d-5417-bcd2-f89f685414b7"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Device Detail",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.steps.Find_Device.data.devices[0].id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Device Details",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "510",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "c819c60a-e920-5718-b51b-522b01088a66"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Last User",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device_last_logged_on_user",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.steps.Find_Device.data.devices[0].id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Last Logged-On User",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "640",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "77f2fdce-80be-5ce1-b08a-c6e7ba42363b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Console Link",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device_dashboard_url",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.steps.Find_Device.data.devices[0].id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Device Dashboard URL",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "770",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "168fd4c5-aa19-534b-9688-0f4983972aab"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Summarize",
+              "description": null,
+              "arguments": {
+                "managed": true,
+                "device_id": "{{ vars.steps.Find_Device.data.devices[0].id }}",
+                "system_name": "{{ vars.steps.Get_Device_Detail.data.systemName }}",
+                "node_class": "{{ vars.steps.Get_Device_Detail.data.nodeClass }}",
+                "offline": "{{ vars.steps.Get_Device_Detail.data.offline }}",
+                "organization_id": "{{ vars.steps.Get_Device_Detail.data.organizationId }}",
+                "console_url": "{{ vars.steps.Get_Console_Link.data.url }}"
+              },
+              "status": null,
+              "top": "900",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "bf03b626-e4fd-5e80-9fdc-07f33ecea580"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Not Managed",
+              "description": null,
+              "arguments": {
+                "managed": false,
+                "note": "No NinjaOne device matched. The host may be unmanaged, decommissioned, or known by another name."
+              },
+              "status": null,
+              "top": "510",
+              "left": "540",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "240f8cda-f2a7-5e99-a67a-0af327c8305b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "start -> Find Device",
+              "targetStep": "/api/3/workflow_steps/a0bd13ef-896f-50e2-bde6-2b1f3b8c69e3",
+              "sourceStep": "/api/3/workflow_steps/c7f12810-be7b-5341-a589-abaf02558b32",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "3847c4a5-d45d-507b-8f1d-3216195d8b3b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Find Device -> Check Found",
+              "targetStep": "/api/3/workflow_steps/ceba0cdb-484d-5417-bcd2-f89f685414b7",
+              "sourceStep": "/api/3/workflow_steps/a0bd13ef-896f-50e2-bde6-2b1f3b8c69e3",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "2dd8d188-715e-5c46-8148-c54bb100a9f5"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Check Found -> Get Device Detail",
+              "targetStep": "/api/3/workflow_steps/c819c60a-e920-5718-b51b-522b01088a66",
+              "sourceStep": "/api/3/workflow_steps/ceba0cdb-484d-5417-bcd2-f89f685414b7",
+              "label": "found",
+              "isExecuted": false,
+              "group": null,
+              "uuid": "bc75c9ef-48b8-5624-a0ca-2bab8abf4801"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Check Found -> Not Managed",
+              "targetStep": "/api/3/workflow_steps/240f8cda-f2a7-5e99-a67a-0af327c8305b",
+              "sourceStep": "/api/3/workflow_steps/ceba0cdb-484d-5417-bcd2-f89f685414b7",
+              "label": "not found",
+              "isExecuted": false,
+              "group": null,
+              "uuid": "038329ad-52e4-506b-ab35-79a564d0cc07"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Device Detail -> Get Last User",
+              "targetStep": "/api/3/workflow_steps/77f2fdce-80be-5ce1-b08a-c6e7ba42363b",
+              "sourceStep": "/api/3/workflow_steps/c819c60a-e920-5718-b51b-522b01088a66",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "1a4fda41-4177-5acd-bde2-515de06f73d9"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Last User -> Get Console Link",
+              "targetStep": "/api/3/workflow_steps/168fd4c5-aa19-534b-9688-0f4983972aab",
+              "sourceStep": "/api/3/workflow_steps/77f2fdce-80be-5ce1-b08a-c6e7ba42363b",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "6ae657e7-1882-510d-be96-98ded2d1b9f0"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Console Link -> Summarize",
+              "targetStep": "/api/3/workflow_steps/bf03b626-e4fd-5e80-9fdc-07f33ecea580",
+              "sourceStep": "/api/3/workflow_steps/168fd4c5-aa19-534b-9688-0f4983972aab",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "07683ba5-615e-506f-9d36-034c73dc9100"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/9e8d41e4-8ada-4a2c-bd02-07f62c6d0a00",
+          "playbookOrigin": null,
+          "isEditable": true,
+          "uuid": "afc5b43d-594b-5063-9edd-7e116787e202",
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "name": "NinjaOne - Find Exposed Endpoints",
+          "aliasName": null,
+          "tag": "",
+          "recordTags": [],
+          "description": "Given a product name from an advisory, answer \"does this exist on our estate, and where is it unpatched?\" -- the question a vulnerability workflow has to answer before anyone raises a ticket. Reads the estate-wide software inventory and the pending third-party patch report, so it needs no per-device iteration.\n",
+          "isActive": true,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": 0,
+          "parameters": [
+            "product"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1792505497,
+          "collection": "/api/3/workflow_collections/5f1a009c-081c-5a54-8929-c68b24bd1eb5",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/f22dbdf7-ec05-5cb9-9ca1-cd5e56a7c605",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "start",
+              "description": null,
+              "arguments": {
+                "inputVariables": [
+                  {
+                    "name": "product"
+                  },
+                  {
+                    "name": "product"
+                  }
+                ],
+                "title": "NinjaOne - Find Exposed Endpoints",
+                "resources": [
+                  "assets"
+                ],
+                "route": "73589248-8447-5bf1-bd97-07cec928cf91",
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "product": "{{vars.request.data[\"product\"]}}"
+                    },
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "triggerOnSource": true,
+                "triggerOnReplicate": false,
+                "noRecordExecution": true,
+                "singleRecordExecution": false,
+                "__triggerLimit": true,
+                "executeButtonText": "Execute",
+                "showToasterMessage": {
+                  "visible": false,
+                  "messageVisible": true
+                },
+                "displayConditions": {
+                  "assets": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "f22dbdf7-ec05-5cb9-9ca1-cd5e56a7c605"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Search Installed Software",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_software_inventory_report",
+                "config": "",
+                "params": {
+                  "name_contains": "{{ vars.input.params.product }}",
+                  "max_records": 1000
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Software Inventory Report",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "250",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "fab03e9b-875a-5429-9898-fd5192404612"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Search Pending Patches",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_pending_software_patches_report",
+                "config": "",
+                "params": {
+                  "name_contains": "{{ vars.input.params.product }}",
+                  "max_records": 1000
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Pending Software Patches Report",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "380",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "f8577a8f-ea94-5ad3-98a2-084a8b0478eb"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Branch On Exposure",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "option": "exposed",
+                    "condition": "{{ (vars.steps.Search_Pending_Patches.data.count | default(0) | int) > 0 }}",
+                    "step_iri": "/api/3/workflow_steps/b5a984f2-609e-5fb1-82ab-454a242ff014",
+                    "step_name": "Exposed"
+                  },
+                  {
+                    "option": "installed but patched",
+                    "condition": "{{ (vars.steps.Search_Pending_Patches.data.count | default(0) | int) == 0 and (vars.steps.Search_Installed_Software.data.count | default(0) | int) > 0 }}",
+                    "step_iri": "/api/3/workflow_steps/5e135480-ecb4-50c9-a854-722ab5ed156f",
+                    "step_name": "Installed And Current"
+                  },
+                  {
+                    "option": "not present",
+                    "condition": "{{ (vars.steps.Search_Installed_Software.data.count | default(0) | int) == 0 }}",
+                    "step_iri": "/api/3/workflow_steps/14e2843e-5199-5a83-93b0-8f4a8e94f4eb",
+                    "step_name": "Not Present"
+                  }
+                ]
+              },
+              "status": null,
+              "top": "510",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "group": null,
+              "uuid": "ef1ea7e6-91c3-5fd7-a165-fb309143d2ba"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Exposed",
+              "description": null,
+              "arguments": {
+                "verdict": "exposed",
+                "installed_count": "{{ vars.steps.Search_Installed_Software.data.count | default(0) }}",
+                "unpatched_count": "{{ vars.steps.Search_Pending_Patches.data.count | default(0) }}",
+                "unpatched_device_ids": "{{ vars.steps.Search_Pending_Patches.data.results | default([]) | map(attribute='deviceId') | unique | list }}"
+              },
+              "status": null,
+              "top": "640",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "b5a984f2-609e-5fb1-82ab-454a242ff014"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Installed And Current",
+              "description": null,
+              "arguments": {
+                "verdict": "installed_and_current",
+                "installed_count": "{{ vars.steps.Search_Installed_Software.data.count | default(0) }}",
+                "unpatched_count": 0,
+                "installed_device_ids": "{{ vars.steps.Search_Installed_Software.data.results | default([]) | map(attribute='deviceId') | unique | list }}"
+              },
+              "status": null,
+              "top": "640",
+              "left": "540",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "5e135480-ecb4-50c9-a854-722ab5ed156f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Not Present",
+              "description": null,
+              "arguments": {
+                "verdict": "not_present",
+                "installed_count": 0,
+                "unpatched_count": 0,
+                "note": "The product is not installed on any managed endpoint, so this advisory can be ruled out."
+              },
+              "status": null,
+              "top": "640",
+              "left": "880",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "14e2843e-5199-5a83-93b0-8f4a8e94f4eb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "start -> Search Installed Software",
+              "targetStep": "/api/3/workflow_steps/fab03e9b-875a-5429-9898-fd5192404612",
+              "sourceStep": "/api/3/workflow_steps/f22dbdf7-ec05-5cb9-9ca1-cd5e56a7c605",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "79c2440d-cf15-51e3-b4fc-da3f17f8b5e3"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Search Installed Software -> Search Pending Patches",
+              "targetStep": "/api/3/workflow_steps/f8577a8f-ea94-5ad3-98a2-084a8b0478eb",
+              "sourceStep": "/api/3/workflow_steps/fab03e9b-875a-5429-9898-fd5192404612",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "ae15f7cf-fda3-5f27-9214-3d9984b732da"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Search Pending Patches -> Branch On Exposure",
+              "targetStep": "/api/3/workflow_steps/ef1ea7e6-91c3-5fd7-a165-fb309143d2ba",
+              "sourceStep": "/api/3/workflow_steps/f8577a8f-ea94-5ad3-98a2-084a8b0478eb",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "a9449e9e-15e1-5bd3-ada5-539e1e0c22c4"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Branch On Exposure -> Exposed",
+              "targetStep": "/api/3/workflow_steps/b5a984f2-609e-5fb1-82ab-454a242ff014",
+              "sourceStep": "/api/3/workflow_steps/ef1ea7e6-91c3-5fd7-a165-fb309143d2ba",
+              "label": "exposed",
+              "isExecuted": false,
+              "group": null,
+              "uuid": "073d96f4-3c1c-50b8-b6ac-f1a7066b2e56"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Branch On Exposure -> Installed And Current",
+              "targetStep": "/api/3/workflow_steps/5e135480-ecb4-50c9-a854-722ab5ed156f",
+              "sourceStep": "/api/3/workflow_steps/ef1ea7e6-91c3-5fd7-a165-fb309143d2ba",
+              "label": "installed but patched",
+              "isExecuted": false,
+              "group": null,
+              "uuid": "3f39c1c2-91d0-55d9-aa7c-d06dba61f9ba"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Branch On Exposure -> Not Present",
+              "targetStep": "/api/3/workflow_steps/14e2843e-5199-5a83-93b0-8f4a8e94f4eb",
+              "sourceStep": "/api/3/workflow_steps/ef1ea7e6-91c3-5fd7-a165-fb309143d2ba",
+              "label": "not present",
+              "isExecuted": false,
+              "group": null,
+              "uuid": "479f71d8-ae4e-59c4-b151-60387200d3ba"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/9e8d41e4-8ada-4a2c-bd02-07f62c6d0a00",
+          "playbookOrigin": null,
+          "isEditable": true,
+          "uuid": "005993aa-c266-55e3-9588-cf9ab42a6a85",
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "name": "NinjaOne - Patch Endpoint with Approval",
+          "aliasName": null,
+          "tag": "",
+          "recordTags": [],
+          "description": "Show an analyst what is pending on one endpoint, ask for approval, then scan and apply. Requires OS and software patching to be enabled in the policy the device inherits, otherwise scan/apply return \"patching is not enabled\" -- a tenant setting, not a connector fault.\n",
+          "isActive": true,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": 0,
+          "parameters": [
+            "device_id"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1792505497,
+          "collection": "/api/3/workflow_collections/5f1a009c-081c-5a54-8929-c68b24bd1eb5",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d927a311-6e53-5c59-9f96-555cb4f99e04",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "start",
+              "description": null,
+              "arguments": {
+                "inputVariables": [
+                  {
+                    "name": "device_id"
+                  },
+                  {
+                    "name": "device_id"
+                  }
+                ],
+                "title": "NinjaOne - Patch Endpoint with Approval",
+                "resources": [
+                  "assets"
+                ],
+                "route": "4d56ce27-31b4-5159-bcde-1df80ad143bb",
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "device_id": "{{vars.request.data[\"device_id\"]}}"
+                    },
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "triggerOnSource": true,
+                "triggerOnReplicate": false,
+                "noRecordExecution": true,
+                "singleRecordExecution": false,
+                "__triggerLimit": true,
+                "executeButtonText": "Execute",
+                "showToasterMessage": {
+                  "visible": false,
+                  "messageVisible": true
+                },
+                "displayConditions": {
+                  "assets": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "d927a311-6e53-5c59-9f96-555cb4f99e04"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Pending OS Patches",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device_pending_os_patches",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Device Pending OS Patches",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "250",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "868f0d44-cd65-5823-ab45-6a332a5adae6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Pending Software Patches",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device_pending_software_patches",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Device Pending Software Patches",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "380",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "42426f54-ae0e-56f9-9bd7-37f14d63d586"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Approve Patching",
+              "description": "**{{ vars.steps.List_Pending_OS_Patches | default([]) | length }}** OS patches and **{{ vars.steps.List_Pending_Software_Patches | default([]) | length }}** software patches are pending. Click **apply** to scan and install, or **skip** to leave it alone.",
+              "arguments": {
+                "type": "DecisionBased",
+                "input": {
+                  "schema": {
+                    "title": "Apply patches to this endpoint?",
+                    "description": "**{{ vars.steps.List_Pending_OS_Patches | default([]) | length }}** OS patches and **{{ vars.steps.List_Pending_Software_Patches | default([]) | length }}** software patches are pending. Click **apply** to scan and install, or **skip** to leave it alone.",
+                    "inputVariables": []
+                  }
+                },
+                "record": "",
+                "is_approval": false,
+                "isRecordLinked": false,
+                "owner_detail": {
+                  "isAssigned": false
+                },
+                "step_variables": [],
+                "response_mapping": {
+                  "options": [
+                    {
+                      "option": "apply",
+                      "primary": true,
+                      "step_iri": "/api/3/workflow_steps/54739ef6-81a3-5a37-948b-706bdebcf5af"
+                    },
+                    {
+                      "option": "skip",
+                      "step_iri": "/api/3/workflow_steps/761f8ae9-3430-595e-be94-eb24059716f0"
+                    }
+                  ],
+                  "duplicateOption": false,
+                  "customSuccessMessage": "Awaiting Playbook resumed successfully."
+                },
+                "email_notification": {
+                  "enabled": false,
+                  "smtpParameters": []
+                },
+                "inline_channel_list": [],
+                "external_channel_list": [],
+                "unauthenticated_input": false
+              },
+              "status": null,
+              "top": "510",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+              "group": null,
+              "uuid": "c885e14e-a424-5c23-a4a7-0a02354c0b54"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Scan OS Patches",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "scan_os_patches",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Scan OS Patches",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "640",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "54739ef6-81a3-5a37-948b-706bdebcf5af"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Scan Software Patches",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "scan_software_patches",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Scan Software Patches",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "770",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "bb25a2a7-6682-515b-ae06-24a268e97f2d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Apply OS Patches",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "apply_os_patches",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Apply OS Patches",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "900",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "60beef6c-2c53-5aea-ace6-7e86503e3725"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Apply Software Patches",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "apply_software_patches",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Apply Software Patches",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "1030",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "7cdfdb84-97eb-5b81-8db4-8392d1163c04"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Wait For Agent",
+              "description": null,
+              "arguments": {
+                "type": "TimeBased",
+                "delay": {
+                  "days": 0,
+                  "hours": 0,
+                  "minutes": 0,
+                  "seconds": 300
+                },
+                "rule": {
+                  "actions": [
+                    {
+                      "type": "resume_playbook",
+                      "enabled": true,
+                      "channel_uuid": "e2ce87c2-c55a-11ec-9d64-0242ac120002"
+                    }
+                  ],
+                  "is_active": true,
+                  "event_source": "crudhub"
+                }
+              },
+              "status": null,
+              "top": "1160",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/6832e556-b9c7-497a-babe-feda3bd27dbf",
+              "group": null,
+              "uuid": "01bdf7fe-35d0-5f7c-801d-3df3dba6c2c8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Check Running Jobs",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device_jobs",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Device Jobs",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "1290",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "41325501-8bdb-5cb8-a8e5-302ad661f7e9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Confirm Installed",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device_installed_os_patches",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}",
+                  "status": "INSTALLED"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Device Installed OS Patches",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "1420",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "bd9937ff-a904-509d-9d12-3a79a0bd1841"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Report Outcome",
+              "description": null,
+              "arguments": {
+                "approved": true,
+                "jobs_still_running": "{{ vars.steps.Check_Running_Jobs | default([]) | length }}",
+                "installed_total": "{{ vars.steps.Confirm_Installed | default([]) | length }}"
+              },
+              "status": null,
+              "top": "1550",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "dcbc7dca-193a-5c98-baba-5a22ea974638"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Declined",
+              "description": null,
+              "arguments": {
+                "approved": false,
+                "note": "An analyst declined patching for this endpoint."
+              },
+              "status": null,
+              "top": "640",
+              "left": "540",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "761f8ae9-3430-595e-be94-eb24059716f0"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "start -> List Pending OS Patches",
+              "targetStep": "/api/3/workflow_steps/868f0d44-cd65-5823-ab45-6a332a5adae6",
+              "sourceStep": "/api/3/workflow_steps/d927a311-6e53-5c59-9f96-555cb4f99e04",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "4e138878-15e2-5542-a226-8ea6fe3e64ef"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "List Pending OS Patches -> List Pending Software Patches",
+              "targetStep": "/api/3/workflow_steps/42426f54-ae0e-56f9-9bd7-37f14d63d586",
+              "sourceStep": "/api/3/workflow_steps/868f0d44-cd65-5823-ab45-6a332a5adae6",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "2e8c884d-3cca-5272-b00b-c524ad8319de"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "List Pending Software Patches -> Approve Patching",
+              "targetStep": "/api/3/workflow_steps/c885e14e-a424-5c23-a4a7-0a02354c0b54",
+              "sourceStep": "/api/3/workflow_steps/42426f54-ae0e-56f9-9bd7-37f14d63d586",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "9ebe2ae7-c1c3-5267-bd71-20935f61bc45"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Approve Patching -> Scan OS Patches",
+              "targetStep": "/api/3/workflow_steps/54739ef6-81a3-5a37-948b-706bdebcf5af",
+              "sourceStep": "/api/3/workflow_steps/c885e14e-a424-5c23-a4a7-0a02354c0b54",
+              "label": "apply",
+              "isExecuted": false,
+              "group": null,
+              "uuid": "44117565-5ed3-5292-bacd-29f908da3885"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Approve Patching -> Declined",
+              "targetStep": "/api/3/workflow_steps/761f8ae9-3430-595e-be94-eb24059716f0",
+              "sourceStep": "/api/3/workflow_steps/c885e14e-a424-5c23-a4a7-0a02354c0b54",
+              "label": "skip",
+              "isExecuted": false,
+              "group": null,
+              "uuid": "1be57503-590a-5fcf-b95d-63b514a9e32f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Scan OS Patches -> Scan Software Patches",
+              "targetStep": "/api/3/workflow_steps/bb25a2a7-6682-515b-ae06-24a268e97f2d",
+              "sourceStep": "/api/3/workflow_steps/54739ef6-81a3-5a37-948b-706bdebcf5af",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "ae76b340-d370-54d3-bfb4-a89e24e6eab0"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Scan Software Patches -> Apply OS Patches",
+              "targetStep": "/api/3/workflow_steps/60beef6c-2c53-5aea-ace6-7e86503e3725",
+              "sourceStep": "/api/3/workflow_steps/bb25a2a7-6682-515b-ae06-24a268e97f2d",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "ddd80154-1cdb-58c5-9a25-379d952d0427"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Apply OS Patches -> Apply Software Patches",
+              "targetStep": "/api/3/workflow_steps/7cdfdb84-97eb-5b81-8db4-8392d1163c04",
+              "sourceStep": "/api/3/workflow_steps/60beef6c-2c53-5aea-ace6-7e86503e3725",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "1c1b4514-11f1-5224-9074-adcdd41b5799"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Apply Software Patches -> Wait For Agent",
+              "targetStep": "/api/3/workflow_steps/01bdf7fe-35d0-5f7c-801d-3df3dba6c2c8",
+              "sourceStep": "/api/3/workflow_steps/7cdfdb84-97eb-5b81-8db4-8392d1163c04",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "29b80e24-446f-57db-9b14-c5cba3598212"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Wait For Agent -> Check Running Jobs",
+              "targetStep": "/api/3/workflow_steps/41325501-8bdb-5cb8-a8e5-302ad661f7e9",
+              "sourceStep": "/api/3/workflow_steps/01bdf7fe-35d0-5f7c-801d-3df3dba6c2c8",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "520c9a31-c564-5c9c-82de-e6c78298cd03"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Check Running Jobs -> Confirm Installed",
+              "targetStep": "/api/3/workflow_steps/bd9937ff-a904-509d-9d12-3a79a0bd1841",
+              "sourceStep": "/api/3/workflow_steps/41325501-8bdb-5cb8-a8e5-302ad661f7e9",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "852116ea-a50a-5774-a18e-67daca5b0dd1"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Confirm Installed -> Report Outcome",
+              "targetStep": "/api/3/workflow_steps/dcbc7dca-193a-5c98-baba-5a22ea974638",
+              "sourceStep": "/api/3/workflow_steps/bd9937ff-a904-509d-9d12-3a79a0bd1841",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "98ae4b63-9b88-570e-9b80-5f19c3777c59"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/9e8d41e4-8ada-4a2c-bd02-07f62c6d0a00",
+          "playbookOrigin": null,
+          "isEditable": true,
+          "uuid": "d17f930c-e01a-52b2-8e12-b000c175e32b",
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "name": "NinjaOne - Reboot Endpoint with Approval",
+          "aliasName": null,
+          "tag": "",
+          "recordTags": [],
+          "description": "Ask before rebooting, suppress monitoring for the duration so the reboot does not raise its own alerts, reboot, then confirm the endpoint came back and lift the maintenance window.\n",
+          "isActive": true,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": 0,
+          "parameters": [
+            "device_id"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1792505497,
+          "collection": "/api/3/workflow_collections/5f1a009c-081c-5a54-8929-c68b24bd1eb5",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/7767776d-af78-5756-8d9a-3b735560034f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "start",
+              "description": null,
+              "arguments": {
+                "inputVariables": [
+                  {
+                    "name": "device_id"
+                  },
+                  {
+                    "name": "device_id"
+                  }
+                ],
+                "title": "NinjaOne - Reboot Endpoint with Approval",
+                "resources": [
+                  "assets"
+                ],
+                "route": "bd7991d1-2a68-54a3-8a3b-ad642d9f4a8b",
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "device_id": "{{vars.request.data[\"device_id\"]}}"
+                    },
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "triggerOnSource": true,
+                "triggerOnReplicate": false,
+                "noRecordExecution": true,
+                "singleRecordExecution": false,
+                "__triggerLimit": true,
+                "executeButtonText": "Execute",
+                "showToasterMessage": {
+                  "visible": false,
+                  "messageVisible": true
+                },
+                "displayConditions": {
+                  "assets": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "7767776d-af78-5756-8d9a-3b735560034f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Endpoint",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Device Details",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "250",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "af3f5b99-c437-5be5-9a49-d190136ce3cd"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Approve Reboot",
+              "description": "Reboot **{{ vars.steps.Get_Endpoint.systemName }}** ({{ vars.steps.Get_Endpoint.nodeClass }})? The user will lose unsaved work.",
+              "arguments": {
+                "type": "DecisionBased",
+                "input": {
+                  "schema": {
+                    "title": "Reboot this endpoint?",
+                    "description": "Reboot **{{ vars.steps.Get_Endpoint.data.systemName }}** ({{ vars.steps.Get_Endpoint.data.nodeClass }})? The user will lose unsaved work.",
+                    "inputVariables": []
+                  }
+                },
+                "record": "",
+                "is_approval": false,
+                "isRecordLinked": false,
+                "owner_detail": {
+                  "isAssigned": false
+                },
+                "step_variables": [],
+                "response_mapping": {
+                  "options": [
+                    {
+                      "option": "reboot",
+                      "primary": true,
+                      "step_iri": "/api/3/workflow_steps/c246eb98-6863-5eef-850c-a3efc8dab340"
+                    },
+                    {
+                      "option": "cancel",
+                      "step_iri": "/api/3/workflow_steps/abb57ec1-9969-57f9-b898-3eb26d37b22f"
+                    }
+                  ],
+                  "duplicateOption": false,
+                  "customSuccessMessage": "Awaiting Playbook resumed successfully."
+                },
+                "email_notification": {
+                  "enabled": false,
+                  "smtpParameters": []
+                },
+                "inline_channel_list": [],
+                "external_channel_list": [],
+                "unauthenticated_input": false
+              },
+              "status": null,
+              "top": "380",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/fc04082a-d7dc-4299-96fb-6837b1baa0fe",
+              "group": null,
+              "uuid": "acfaac00-9a40-5045-84fb-40a8984b0318"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Suppress Monitoring",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "schedule_maintenance",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}",
+                  "end_time": "{{ (arrow.utcnow().shift(minutes=30)).format('YYYY-MM-DDTHH:mm:ss') }}Z",
+                  "disabled_features": "ALERTS",
+                  "reason": "Approved reboot from FortiSOAR"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Schedule Maintenance",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "510",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "c246eb98-6863-5eef-850c-a3efc8dab340"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Reboot",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "reboot_device",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}",
+                  "mode": "NORMAL",
+                  "reason": "Approved reboot from FortiSOAR"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Reboot Device",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "640",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "0397057a-50e3-56d6-8241-26d9683265f1"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Wait For Boot",
+              "description": null,
+              "arguments": {
+                "type": "TimeBased",
+                "delay": {
+                  "days": 0,
+                  "hours": 0,
+                  "minutes": 0,
+                  "seconds": 420
+                },
+                "rule": {
+                  "actions": [
+                    {
+                      "type": "resume_playbook",
+                      "enabled": true,
+                      "channel_uuid": "e2ce87c2-c55a-11ec-9d64-0242ac120002"
+                    }
+                  ],
+                  "is_active": true,
+                  "event_source": "crudhub"
+                }
+              },
+              "status": null,
+              "top": "770",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/6832e556-b9c7-497a-babe-feda3bd27dbf",
+              "group": null,
+              "uuid": "fa189002-39da-52f4-b7b8-478df1cfe1ba"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Check Back Online",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Device Details",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "900",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "0634bdbb-632a-5518-bc24-191d74e93d84"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Lift Monitoring",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "cancel_maintenance",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Cancel Maintenance",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "1030",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "508b5a72-3b77-56f2-ba99-5ccc5cf934f8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Report Reboot",
+              "description": null,
+              "arguments": {
+                "approved": true,
+                "back_online": "{{ not vars.steps.Check_Back_Online.data.offline }}"
+              },
+              "status": null,
+              "top": "1160",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "6b1c1884-e513-5135-8d80-e4613212ea02"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Declined",
+              "description": null,
+              "arguments": {
+                "approved": false
+              },
+              "status": null,
+              "top": "510",
+              "left": "540",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "abb57ec1-9969-57f9-b898-3eb26d37b22f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "start -> Get Endpoint",
+              "targetStep": "/api/3/workflow_steps/af3f5b99-c437-5be5-9a49-d190136ce3cd",
+              "sourceStep": "/api/3/workflow_steps/7767776d-af78-5756-8d9a-3b735560034f",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "8e21a0d0-a8d5-5e14-9846-939b267a49a5"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Endpoint -> Approve Reboot",
+              "targetStep": "/api/3/workflow_steps/acfaac00-9a40-5045-84fb-40a8984b0318",
+              "sourceStep": "/api/3/workflow_steps/af3f5b99-c437-5be5-9a49-d190136ce3cd",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "8b52a2a0-d823-5711-bead-993623d49e37"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Approve Reboot -> Suppress Monitoring",
+              "targetStep": "/api/3/workflow_steps/c246eb98-6863-5eef-850c-a3efc8dab340",
+              "sourceStep": "/api/3/workflow_steps/acfaac00-9a40-5045-84fb-40a8984b0318",
+              "label": "reboot",
+              "isExecuted": false,
+              "group": null,
+              "uuid": "86679322-c2d9-5fa2-bb09-fb2472aec484"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Approve Reboot -> Declined",
+              "targetStep": "/api/3/workflow_steps/abb57ec1-9969-57f9-b898-3eb26d37b22f",
+              "sourceStep": "/api/3/workflow_steps/acfaac00-9a40-5045-84fb-40a8984b0318",
+              "label": "cancel",
+              "isExecuted": false,
+              "group": null,
+              "uuid": "ee043e99-bd6f-56cf-b48f-208df54267e6"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Suppress Monitoring -> Reboot",
+              "targetStep": "/api/3/workflow_steps/0397057a-50e3-56d6-8241-26d9683265f1",
+              "sourceStep": "/api/3/workflow_steps/c246eb98-6863-5eef-850c-a3efc8dab340",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "b53b13b9-e139-5ed0-9d1a-10206f7aeb2c"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Reboot -> Wait For Boot",
+              "targetStep": "/api/3/workflow_steps/fa189002-39da-52f4-b7b8-478df1cfe1ba",
+              "sourceStep": "/api/3/workflow_steps/0397057a-50e3-56d6-8241-26d9683265f1",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "5576df71-e68d-5ced-9c4b-8aaf900c4d63"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Wait For Boot -> Check Back Online",
+              "targetStep": "/api/3/workflow_steps/0634bdbb-632a-5518-bc24-191d74e93d84",
+              "sourceStep": "/api/3/workflow_steps/fa189002-39da-52f4-b7b8-478df1cfe1ba",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "b8ab8613-59d1-541f-9bee-62e7b35e0fce"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Check Back Online -> Lift Monitoring",
+              "targetStep": "/api/3/workflow_steps/508b5a72-3b77-56f2-ba99-5ccc5cf934f8",
+              "sourceStep": "/api/3/workflow_steps/0634bdbb-632a-5518-bc24-191d74e93d84",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "b5f2080a-3c22-5b97-ba8d-de84a2c7c9d9"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Lift Monitoring -> Report Reboot",
+              "targetStep": "/api/3/workflow_steps/6b1c1884-e513-5135-8d80-e4613212ea02",
+              "sourceStep": "/api/3/workflow_steps/508b5a72-3b77-56f2-ba99-5ccc5cf934f8",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "56aa98b5-11fc-5547-933e-fcbd552d309f"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/9e8d41e4-8ada-4a2c-bd02-07f62c6d0a00",
+          "playbookOrigin": null,
+          "isEditable": true,
+          "uuid": "ebb0df84-534c-5d7c-9d42-8aa95fec178a",
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "name": "NinjaOne - Restart Windows Service",
+          "aliasName": null,
+          "tag": "",
+          "recordTags": [],
+          "description": "Restart a named Windows service on an endpoint and verify it came back running. The usual response to a \"service stopped\" monitoring alert.\n",
+          "isActive": true,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": 0,
+          "parameters": [
+            "device_id",
+            "service_name"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1792505497,
+          "collection": "/api/3/workflow_collections/5f1a009c-081c-5a54-8929-c68b24bd1eb5",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a6200c72-e883-598b-b5f1-3fd26db6a531",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "start",
+              "description": null,
+              "arguments": {
+                "inputVariables": [
+                  {
+                    "name": "device_id"
+                  },
+                  {
+                    "name": "service_name"
+                  },
+                  {
+                    "name": "device_id"
+                  },
+                  {
+                    "name": "service_name"
+                  }
+                ],
+                "title": "NinjaOne - Restart Windows Service",
+                "resources": [
+                  "assets"
+                ],
+                "route": "68b07996-3b5a-5c2d-9904-b737285a2466",
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "device_id": "{{vars.request.data[\"device_id\"]}}",
+                      "service_name": "{{vars.request.data[\"service_name\"]}}"
+                    },
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "triggerOnSource": true,
+                "triggerOnReplicate": false,
+                "noRecordExecution": true,
+                "singleRecordExecution": false,
+                "__triggerLimit": true,
+                "executeButtonText": "Execute",
+                "showToasterMessage": {
+                  "visible": false,
+                  "messageVisible": true
+                },
+                "displayConditions": {
+                  "assets": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "a6200c72-e883-598b-b5f1-3fd26db6a531"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Read Service State",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device_windows_services",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}",
+                  "name": "{{ vars.input.params.service_name }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Windows Services",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "250",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "2c1bc4fe-684b-59df-b973-7d0d0c7747b0"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Restart Service",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "control_windows_service",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}",
+                  "service_id": "{{ vars.input.params.service_name }}",
+                  "action": "RESTART"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Control Windows Service",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "380",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "34c5b043-f035-53bb-8f56-9806bff36f97"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Wait For Service",
+              "description": null,
+              "arguments": {
+                "type": "TimeBased",
+                "delay": {
+                  "days": 0,
+                  "hours": 0,
+                  "minutes": 0,
+                  "seconds": 60
+                },
+                "rule": {
+                  "actions": [
+                    {
+                      "type": "resume_playbook",
+                      "enabled": true,
+                      "channel_uuid": "e2ce87c2-c55a-11ec-9d64-0242ac120002"
+                    }
+                  ],
+                  "is_active": true,
+                  "event_source": "crudhub"
+                }
+              },
+              "status": null,
+              "top": "510",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/6832e556-b9c7-497a-babe-feda3bd27dbf",
+              "group": null,
+              "uuid": "a761fbd1-938d-5c36-b5ee-b93d5e7c0eaa"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Verify Service State",
+              "description": null,
+              "arguments": {
+                "connector": "ninjaone",
+                "operation": "get_device_windows_services",
+                "config": "",
+                "params": {
+                  "device_id": "{{ vars.input.params.device_id }}",
+                  "name": "{{ vars.input.params.service_name }}"
+                },
+                "version": "1.0.0",
+                "name": "NinjaOne",
+                "operationTitle": "Get Windows Services",
+                "step_variables": [],
+                "pickFromTenant": false
+              },
+              "status": null,
+              "top": "640",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "40e5935e-6aaf-57f2-86d4-a5b3bac2bcba"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Report Service",
+              "description": null,
+              "arguments": {
+                "state_before": "{{ vars.steps.Read_Service_State[0].state | default('unknown') }}",
+                "state_after": "{{ vars.steps.Verify_Service_State[0].state | default('unknown') }}",
+                "running": "{{ vars.steps.Verify_Service_State[0].state | default('') == 'RUNNING' }}"
+              },
+              "status": null,
+              "top": "770",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "ee8c6fd7-39d5-5dee-96dc-c0701ff0854a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "start -> Read Service State",
+              "targetStep": "/api/3/workflow_steps/2c1bc4fe-684b-59df-b973-7d0d0c7747b0",
+              "sourceStep": "/api/3/workflow_steps/a6200c72-e883-598b-b5f1-3fd26db6a531",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "9d1ee80b-81be-54ba-9524-09ffacfed487"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Read Service State -> Restart Service",
+              "targetStep": "/api/3/workflow_steps/34c5b043-f035-53bb-8f56-9806bff36f97",
+              "sourceStep": "/api/3/workflow_steps/2c1bc4fe-684b-59df-b973-7d0d0c7747b0",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "56d3ec47-3a15-5d87-baf4-2b6e290d374f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Restart Service -> Wait For Service",
+              "targetStep": "/api/3/workflow_steps/a761fbd1-938d-5c36-b5ee-b93d5e7c0eaa",
+              "sourceStep": "/api/3/workflow_steps/34c5b043-f035-53bb-8f56-9806bff36f97",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "a3174875-ebb8-5353-bf9e-291b9089c2d1"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Wait For Service -> Verify Service State",
+              "targetStep": "/api/3/workflow_steps/40e5935e-6aaf-57f2-86d4-a5b3bac2bcba",
+              "sourceStep": "/api/3/workflow_steps/a761fbd1-938d-5c36-b5ee-b93d5e7c0eaa",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "0f1d57c4-4154-5dd7-8e50-0b9401f8152f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Verify Service State -> Report Service",
+              "targetStep": "/api/3/workflow_steps/ee8c6fd7-39d5-5dee-96dc-c0701ff0854a",
+              "sourceStep": "/api/3/workflow_steps/40e5935e-6aaf-57f2-86d4-a5b3bac2bcba",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "2ecefe65-d8c0-59db-b90c-eea9a1b64549"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/9e8d41e4-8ada-4a2c-bd02-07f62c6d0a00",
+          "playbookOrigin": null,
+          "isEditable": true,
+          "uuid": "2663141f-a19e-5cd0-8c02-4625e4a4616a",
+          "owners": [],
+          "isPrivate": false
+        }
+      ]
+    }
+  ]
+}

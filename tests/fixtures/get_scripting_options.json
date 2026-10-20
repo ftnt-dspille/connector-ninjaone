@@ -1,0 +1,650 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Uncategorized",
+      "internal": true
+    },
+    {
+      "id": 2,
+      "name": "Hardware",
+      "internal": true
+    },
+    {
+      "id": 3,
+      "name": "Maintenance",
+      "internal": true
+    },
+    {
+      "id": 5,
+      "name": "Patching",
+      "internal": true
+    }
+  ],
+  "scripts": [
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Scan for software updates",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Scan for Windows software updates",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Apply software updates",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Reboot",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Forced Reboot",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Turn System Restore On",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Turn System Restore Off",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Fix rebuild performance counters",
+      "language": "",
+      "categoryId": 3
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Group policy force update",
+      "language": "",
+      "categoryId": 3
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Clear DNS cache",
+      "language": "",
+      "categoryId": 3
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Clear Event Logs",
+      "language": "",
+      "categoryId": 3
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Delete Temporary Files",
+      "language": "",
+      "categoryId": 3
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Empty Recycle Bin",
+      "language": "",
+      "categoryId": 3
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Fix File System Errors",
+      "language": "",
+      "categoryId": 3
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Release & Renew IP Address",
+      "language": "",
+      "categoryId": 3
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Windows Cleanup",
+      "language": "",
+      "categoryId": 3
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Enable CD-ROM drives",
+      "language": "",
+      "categoryId": 2
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Disable CD-ROM drives",
+      "language": "",
+      "categoryId": 2
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Enable USB drives",
+      "language": "",
+      "categoryId": 2
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Disable USB drives",
+      "language": "",
+      "categoryId": 2
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Enable Floppy drives",
+      "language": "",
+      "categoryId": 2
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Disable Floppy drives",
+      "language": "",
+      "categoryId": 2
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Enable UAC",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Disable UAC",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Log Off Current User",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Remove Google toolbar",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "Remove Yahoo toolbar",
+      "language": "",
+      "categoryId": 1
+    },
+    {
+      "type": "ACTION",
+      "id": 0,
+      "uid": "<uuid>",
+      "name": "SFC Scannow",
+      "language": "",
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 41,
+      "name": "script.enable_cdrom_drives",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 42,
+      "name": "script.disable_cdrom_drives",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 43,
+      "name": "script.enable_usb_drives",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 44,
+      "name": "script.disable_usb_drives",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 45,
+      "name": "script.enable_floppy_drives",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 46,
+      "name": "script.disable_floppy_drives",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 47,
+      "name": "script.fix_rebuild_performance_counters",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 48,
+      "name": "script.group_policy_force_update",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 49,
+      "name": "script.clear_dns_cache",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 50,
+      "name": "script.clear_event_logs",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 51,
+      "name": "script.delete_temp_files",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 52,
+      "name": "script.empty_recycle_bin",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 53,
+      "name": "script.check_disk",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 54,
+      "name": "script.ip_release_renew",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 55,
+      "name": "script.windows_cleanup",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 56,
+      "name": "script.sfc_scan_now",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 57,
+      "name": "<host>",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 58,
+      "name": "script.forced_reboot",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 59,
+      "name": "script.reboot_pending",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 60,
+      "name": "script.enable_uac",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 61,
+      "name": "script.disable_uac",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 62,
+      "name": "script.log_off",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 63,
+      "name": "script.remove_google_toolbar",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 64,
+      "name": "script.remove_yahoo_toolbar",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 65,
+      "name": "<host>",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 66,
+      "name": "script.media_enable_disable",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 67,
+      "name": "script.run_application",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 68,
+      "name": "<host>",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 69,
+      "name": "script.windows_service",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 70,
+      "name": "script.system_restore",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 71,
+      "name": "script.os_patch_scan",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 5
+    },
+    {
+      "type": "SCRIPT",
+      "id": 74,
+      "name": "script.os_patch_apply",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 5
+    },
+    {
+      "type": "SCRIPT",
+      "id": 77,
+      "name": "script.software_patch_scan",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 5
+    },
+    {
+      "type": "SCRIPT",
+      "id": 79,
+      "name": "script.software_patch_apply",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 5
+    },
+    {
+      "type": "SCRIPT",
+      "id": 81,
+      "name": "script.set_maintenance_mode",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    },
+    {
+      "type": "SCRIPT",
+      "id": 84,
+      "name": "script.remove_maintenance_mode",
+      "language": "native",
+      "architecture": [
+        "64",
+        "32"
+      ],
+      "categoryId": 3
+    }
+  ],
+  "credentials": {
+    "roles": [],
+    "credentials": []
+  }
+}

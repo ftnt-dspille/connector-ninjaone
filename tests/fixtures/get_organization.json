@@ -1,0 +1,212 @@
+{
+  "name": "<redacted>",
+  "description": "Internal Infrastructure",
+  "nodeApprovalMode": "AUTOMATIC",
+  "id": 1,
+  "locations": [
+    {
+      "name": "<redacted>",
+      "id": 1
+    }
+  ],
+  "policies": [
+    {
+      "nodeRoleId": 31,
+      "policyId": 26
+    },
+    {
+      "nodeRoleId": 21,
+      "policyId": 24
+    },
+    {
+      "nodeRoleId": 116,
+      "policyId": 22
+    },
+    {
+      "nodeRoleId": 306,
+      "policyId": 33
+    },
+    {
+      "nodeRoleId": 114,
+      "policyId": 20
+    },
+    {
+      "nodeRoleId": 304,
+      "policyId": 33
+    },
+    {
+      "nodeRoleId": 112,
+      "policyId": 18
+    },
+    {
+      "nodeRoleId": 302,
+      "policyId": 33
+    },
+    {
+      "nodeRoleId": 110,
+      "policyId": 16
+    },
+    {
+      "nodeRoleId": 205,
+      "policyId": 4
+    },
+    {
+      "nodeRoleId": 108,
+      "policyId": 14
+    },
+    {
+      "nodeRoleId": 203,
+      "policyId": 3
+    },
+    {
+      "nodeRoleId": 11,
+      "policyId": 27
+    },
+    {
+      "nodeRoleId": 106,
+      "policyId": 12
+    },
+    {
+      "nodeRoleId": 201,
+      "policyId": 2
+    },
+    {
+      "nodeRoleId": 9,
+      "policyId": 5
+    },
+    {
+      "nodeRoleId": 104,
+      "policyId": 10
+    },
+    {
+      "nodeRoleId": 7,
+      "policyId": 31
+    },
+    {
+      "nodeRoleId": 102,
+      "policyId": 8
+    },
+    {
+      "nodeRoleId": 901,
+      "policyId": 32
+    },
+    {
+      "nodeRoleId": 5,
+      "policyId": 29
+    },
+    {
+      "nodeRoleId": 3,
+      "policyId": 3
+    },
+    {
+      "nodeRoleId": 1,
+      "policyId": 1
+    },
+    {
+      "nodeRoleId": 22,
+      "policyId": 25
+    },
+    {
+      "nodeRoleId": 117,
+      "policyId": 23
+    },
+    {
+      "nodeRoleId": 115,
+      "policyId": 21
+    },
+    {
+      "nodeRoleId": 305,
+      "policyId": 33
+    },
+    {
+      "nodeRoleId": 113,
+      "policyId": 19
+    },
+    {
+      "nodeRoleId": 303,
+      "policyId": 33
+    },
+    {
+      "nodeRoleId": 111,
+      "policyId": 17
+    },
+    {
+      "nodeRoleId": 206,
+      "policyId": 4
+    },
+    {
+      "nodeRoleId": 301,
+      "policyId": 33
+    },
+    {
+      "nodeRoleId": 109,
+      "policyId": 15
+    },
+    {
+      "nodeRoleId": 204,
+      "policyId": 3
+    },
+    {
+      "nodeRoleId": 12,
+      "policyId": 28
+    },
+    {
+      "nodeRoleId": 107,
+      "policyId": 13
+    },
+    {
+      "nodeRoleId": 202,
+      "policyId": 2
+    },
+    {
+      "nodeRoleId": 10,
+      "policyId": 6
+    },
+    {
+      "nodeRoleId": 105,
+      "policyId": 11
+    },
+    {
+      "nodeRoleId": 8,
+      "policyId": 34
+    },
+    {
+      "nodeRoleId": 103,
+      "policyId": 9
+    },
+    {
+      "nodeRoleId": 902,
+      "policyId": 33
+    },
+    {
+      "nodeRoleId": 6,
+      "policyId": 30
+    },
+    {
+      "nodeRoleId": 101,
+      "policyId": 7
+    },
+    {
+      "nodeRoleId": 4,
+      "policyId": 4
+    },
+    {
+      "nodeRoleId": 2,
+      "policyId": 2
+    }
+  ],
+  "settings": {
+    "trayicon": {
+      "enabled": false
+    },
+    "splashtop": {
+      "enabled": false
+    },
+    "backup": {
+      "enabled": false
+    },
+    "psa": {
+      "enabled": true
+    }
+  }
+}

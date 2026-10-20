@@ -1,0 +1,28 @@
+{
+  "count": 1,
+  "cursor": {},
+  "results": [
+    {
+      "activeThreatsCount": 0,
+      "quarantinedThreatsCount": 0,
+      "blockedThreatsCount": 0,
+      "failedOSPatchesCount": 0,
+      "pendingOSPatchesCount": 0,
+      "alertCount": 0,
+      "activeJobCount": 0,
+      "failedSoftwarePatchesCount": 0,
+      "pendingSoftwarePatchesCount": 0,
+      "pendingRebootReason": "",
+      "productsInstallationStatuses": {},
+      "offline": true,
+      "parentOffline": false,
+      "healthStatus": "UNKNOWN",
+      "criticalVulnerabilityCount": 0,
+      "highVulnerabilityCount": 0,
+      "mediumVulnerabilityCount": 0,
+      "lowVulnerabilityCount": 0,
+      "installationIssuesCount": 0,
+      "deviceId": 1
+    }
+  ]
+}

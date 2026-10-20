@@ -1,0 +1,484 @@
+# NinjaOne sample playbook collection.
+#
+# Compiled to ninjaone/playbooks/playbooks.json by tools/build_playbooks.sh,
+# which shells out to the fsrpb compiler. Author here, never in the JSON.
+#
+# The collection name follows the convention Fortinet's own shipped connectors
+# use (see fortinet-fortiflex: "Sample - Fortinet FortiFlex - 1.0.0"): the
+# "Sample - " prefix marks it as the connector's bundled examples rather than
+# something the customer wrote, and the trailing version says which connector
+# release it came from when several are installed side by side.
+#
+# Every playbook is built from operations that are live-verified working with a
+# client-credentials token (see COVERAGE.md). Two deliberate omissions:
+#
+#   * Nothing calls `run_script`. It returns 403 "Access key does not have user
+#     context" on a machine-to-machine token, so a sample playbook built on it
+#     would fail for every user who imported it.
+#   * "Patch Endpoint with Approval" DOES call scan/apply, which need patching
+#     enabled in the device's policy. That is a one-time tenant setting rather
+#     than a connector limitation, and the playbook is the reason to go turn it
+#     on -- so it ships, and says so in its description.
+
+collection: Sample - NinjaOne - 1.0.0
+description: Endpoint enrichment, exposure hunting, and gated patch remediation over the NinjaOne Public API v2.
+visible: true
+
+playbooks:
+
+  # ---------------------------------------------------------------- enrich --
+  - name: NinjaOne - Enrich Asset
+    description: >
+      Resolve a hostname, IP, or logged-on user to a NinjaOne device and pull
+      back its identity, owner, and a deep link to the console. This is the
+      first step in almost every other flow, because every device operation
+      takes the numeric NinjaOne device ID rather than a name.
+    is_active: true
+    parameters: [hostname]
+    steps:
+      - name: start
+        type: start
+        module: assets
+        requires_record: false
+        inputVariables:
+          - {name: hostname}
+          - {name: hostname}
+        next: Find Device
+
+      - name: Find Device
+        type: connector
+        next: Check Found
+        connector: ninjaone
+        operation: search_devices
+        config: ""
+        params:
+          query: "{{ vars.input.params.hostname }}"
+          limit: 5
+
+      - name: Check Found
+        type: decision
+        conditions:
+          - display: found
+            when: "{{ vars.steps.Find_Device.devices | default([]) | length > 0 }}"
+            next: Get Device Detail
+          - display: not found
+            when: "{{ vars.steps.Find_Device.devices | default([]) | length == 0 }}"
+            next: Not Managed
+
+      - name: Get Device Detail
+        type: connector
+        next: Get Last User
+        connector: ninjaone
+        operation: get_device
+        config: ""
+        params:
+          device_id: "{{ vars.steps.Find_Device.devices[0].id }}"
+
+      - name: Get Last User
+        type: connector
+        next: Get Console Link
+        connector: ninjaone
+        operation: get_device_last_logged_on_user
+        config: ""
+        params:
+          device_id: "{{ vars.steps.Find_Device.devices[0].id }}"
+
+      - name: Get Console Link
+        type: connector
+        next: Summarize
+        connector: ninjaone
+        operation: get_device_dashboard_url
+        config: ""
+        params:
+          device_id: "{{ vars.steps.Find_Device.devices[0].id }}"
+
+      - name: Summarize
+        type: set_variable
+        vars:
+          managed: true
+          device_id: "{{ vars.steps.Find_Device.devices[0].id }}"
+          system_name: "{{ vars.steps.Get_Device_Detail.systemName }}"
+          node_class: "{{ vars.steps.Get_Device_Detail.nodeClass }}"
+          offline: "{{ vars.steps.Get_Device_Detail.offline }}"
+          organization_id: "{{ vars.steps.Get_Device_Detail.organizationId }}"
+          console_url: "{{ vars.steps.Get_Console_Link.url }}"
+
+      - name: Not Managed
+        type: set_variable
+        vars:
+          managed: false
+          note: "No NinjaOne device matched. The host may be unmanaged, decommissioned, or known by another name."
+
+  # -------------------------------------------------------------- exposure --
+  - name: NinjaOne - Find Exposed Endpoints
+    description: >
+      Given a product name from an advisory, answer "does this exist on our
+      estate, and where is it unpatched?" -- the question a vulnerability
+      workflow has to answer before anyone raises a ticket. Reads the
+      estate-wide software inventory and the pending third-party patch report,
+      so it needs no per-device iteration.
+    is_active: true
+    parameters: [product]
+    steps:
+      - name: start
+        type: start
+        module: assets
+        requires_record: false
+        inputVariables:
+          - {name: product}
+          - {name: product}
+        next: Search Installed Software
+
+      - name: Search Installed Software
+        type: connector
+        next: Search Pending Patches
+        connector: ninjaone
+        operation: get_software_inventory_report
+        config: ""
+        params:
+          name_contains: "{{ vars.input.params.product }}"
+          max_records: 1000
+
+      - name: Search Pending Patches
+        type: connector
+        next: Branch On Exposure
+        connector: ninjaone
+        operation: get_pending_software_patches_report
+        config: ""
+        params:
+          name_contains: "{{ vars.input.params.product }}"
+          max_records: 1000
+
+      # The product match is done by the connector (name_contains), not here.
+      # FortiSOAR's Jinja has no substring TEST, so the obvious
+      # selectattr(..., 'search', ...) fails at runtime with "No test named
+      # 'search'", and json_query's contains() raises on any row whose field is
+      # null -- which the software inventory has. Both were verified against the
+      # live renderer. Filtering in Python keeps this playbook to plain counts.
+      - name: Branch On Exposure
+        type: decision
+        conditions:
+          - display: exposed
+            when: "{{ (vars.steps.Search_Pending_Patches.count | default(0) | int) > 0 }}"
+            next: Exposed
+          - display: installed but patched
+            when: "{{ (vars.steps.Search_Pending_Patches.count | default(0) | int) == 0 and (vars.steps.Search_Installed_Software.count | default(0) | int) > 0 }}"
+            next: Installed And Current
+          - display: not present
+            when: "{{ (vars.steps.Search_Installed_Software.count | default(0) | int) == 0 }}"
+            next: Not Present
+
+      - name: Exposed
+        type: set_variable
+        vars:
+          verdict: exposed
+          installed_count: "{{ vars.steps.Search_Installed_Software.count | default(0) }}"
+          unpatched_count: "{{ vars.steps.Search_Pending_Patches.count | default(0) }}"
+          unpatched_device_ids: "{{ vars.steps.Search_Pending_Patches.results | default([]) | map(attribute='deviceId') | unique | list }}"
+
+      - name: Installed And Current
+        type: set_variable
+        vars:
+          verdict: installed_and_current
+          installed_count: "{{ vars.steps.Search_Installed_Software.count | default(0) }}"
+          unpatched_count: 0
+          installed_device_ids: "{{ vars.steps.Search_Installed_Software.results | default([]) | map(attribute='deviceId') | unique | list }}"
+
+      - name: Not Present
+        type: set_variable
+        vars:
+          verdict: not_present
+          installed_count: 0
+          unpatched_count: 0
+          note: "The product is not installed on any managed endpoint, so this advisory can be ruled out."
+
+  # ------------------------------------------------------------ remediation --
+  - name: NinjaOne - Patch Endpoint with Approval
+    description: >
+      Show an analyst what is pending on one endpoint, ask for approval, then
+      scan and apply. Requires OS and software patching to be enabled in the
+      policy the device inherits, otherwise scan/apply return
+      "patching is not enabled" -- a tenant setting, not a connector fault.
+    is_active: true
+    parameters: [device_id]
+    steps:
+      - name: start
+        type: start
+        module: assets
+        requires_record: false
+        inputVariables:
+          - {name: device_id}
+          - {name: device_id}
+        next: List Pending OS Patches
+
+      - name: List Pending OS Patches
+        type: connector
+        next: List Pending Software Patches
+        connector: ninjaone
+        operation: get_device_pending_os_patches
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+
+      - name: List Pending Software Patches
+        type: connector
+        next: Approve Patching
+        connector: ninjaone
+        operation: get_device_pending_software_patches
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+
+      - name: Approve Patching
+        type: manual_input
+        options:
+          - display: apply
+            primary: true
+            next: Scan OS Patches
+          - display: skip
+            next: Declined
+        title: Apply patches to this endpoint?
+        description: >-
+          **{{ vars.steps.List_Pending_OS_Patches | default([]) | length }}** OS patches and
+          **{{ vars.steps.List_Pending_Software_Patches | default([]) | length }}** software patches
+          are pending. Click **apply** to scan and install, or **skip** to leave it alone.
+
+      - name: Scan OS Patches
+        type: connector
+        next: Scan Software Patches
+        connector: ninjaone
+        operation: scan_os_patches
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+
+      - name: Scan Software Patches
+        type: connector
+        next: Apply OS Patches
+        connector: ninjaone
+        operation: scan_software_patches
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+
+      - name: Apply OS Patches
+        type: connector
+        next: Apply Software Patches
+        connector: ninjaone
+        operation: apply_os_patches
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+
+      - name: Apply Software Patches
+        type: connector
+        next: Wait For Agent
+        connector: ninjaone
+        operation: apply_software_patches
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+
+      # Patch apply answers 204 with no job identifier, so there is no handle to
+      # poll. Give the agent time, then read the jobs list and the install
+      # history -- that, not the API response, is the proof it worked.
+      - name: Wait For Agent
+        type: delay
+        next: Check Running Jobs
+        seconds: 300
+
+      - name: Check Running Jobs
+        type: connector
+        next: Confirm Installed
+        connector: ninjaone
+        operation: get_device_jobs
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+
+      - name: Confirm Installed
+        type: connector
+        next: Report Outcome
+        connector: ninjaone
+        operation: get_device_installed_os_patches
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+          status: INSTALLED
+
+      - name: Report Outcome
+        type: set_variable
+        vars:
+          approved: true
+          jobs_still_running: "{{ vars.steps.Check_Running_Jobs | default([]) | length }}"
+          installed_total: "{{ vars.steps.Confirm_Installed | default([]) | length }}"
+
+      - name: Declined
+        type: set_variable
+        vars:
+          approved: false
+          note: "An analyst declined patching for this endpoint."
+
+  # ---------------------------------------------------------------- reboot --
+  - name: NinjaOne - Reboot Endpoint with Approval
+    description: >
+      Ask before rebooting, suppress monitoring for the duration so the reboot
+      does not raise its own alerts, reboot, then confirm the endpoint came
+      back and lift the maintenance window.
+    is_active: true
+    parameters: [device_id]
+    steps:
+      - name: start
+        type: start
+        module: assets
+        requires_record: false
+        inputVariables:
+          - {name: device_id}
+          - {name: device_id}
+        next: Get Endpoint
+
+      - name: Get Endpoint
+        type: connector
+        next: Approve Reboot
+        connector: ninjaone
+        operation: get_device
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+
+      - name: Approve Reboot
+        type: manual_input
+        options:
+          - display: reboot
+            primary: true
+            next: Suppress Monitoring
+          - display: cancel
+            next: Declined
+        title: Reboot this endpoint?
+        description: >-
+          Reboot **{{ vars.steps.Get_Endpoint.systemName }}**
+          ({{ vars.steps.Get_Endpoint.nodeClass }})? The user will lose unsaved work.
+
+      # Suppress alerts first: rebooting a monitored endpoint otherwise trips the
+      # very conditions the SOC is watching, and someone gets paged for a change
+      # that was approved.
+      - name: Suppress Monitoring
+        type: connector
+        next: Reboot
+        connector: ninjaone
+        operation: schedule_maintenance
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+          end_time: "{{ (arrow.utcnow().shift(minutes=30)).format('YYYY-MM-DDTHH:mm:ss') }}Z"
+          disabled_features: ALERTS
+          reason: "Approved reboot from FortiSOAR"
+
+      - name: Reboot
+        type: connector
+        next: Wait For Boot
+        connector: ninjaone
+        operation: reboot_device
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+          mode: NORMAL
+          reason: "Approved reboot from FortiSOAR"
+
+      # The reboot is DEFERRED, not immediate -- the call returns while the
+      # endpoint is still up, so checking too early reads as "nothing happened".
+      - name: Wait For Boot
+        type: delay
+        next: Check Back Online
+        seconds: 420
+
+      - name: Check Back Online
+        type: connector
+        next: Lift Monitoring
+        connector: ninjaone
+        operation: get_device
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+
+      - name: Lift Monitoring
+        type: connector
+        next: Report Reboot
+        connector: ninjaone
+        operation: cancel_maintenance
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+
+      - name: Report Reboot
+        type: set_variable
+        vars:
+          approved: true
+          back_online: "{{ not vars.steps.Check_Back_Online.offline }}"
+
+      - name: Declined
+        type: set_variable
+        vars:
+          approved: false
+
+  # --------------------------------------------------------------- service --
+  - name: NinjaOne - Restart Windows Service
+    description: >
+      Restart a named Windows service on an endpoint and verify it came back
+      running. The usual response to a "service stopped" monitoring alert.
+    is_active: true
+    parameters: [device_id, service_name]
+    steps:
+      - name: start
+        type: start
+        module: assets
+        requires_record: false
+        inputVariables:
+          - {name: device_id}
+          - {name: service_name}
+          - {name: device_id}
+          - {name: service_name}
+        next: Read Service State
+
+      - name: Read Service State
+        type: connector
+        next: Restart Service
+        connector: ninjaone
+        operation: get_device_windows_services
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+          name: "{{ vars.input.params.service_name }}"
+
+      - name: Restart Service
+        type: connector
+        next: Wait For Service
+        connector: ninjaone
+        operation: control_windows_service
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+          service_id: "{{ vars.input.params.service_name }}"
+          action: RESTART
+
+      - name: Wait For Service
+        type: delay
+        next: Verify Service State
+        seconds: 60
+
+      - name: Verify Service State
+        type: connector
+        next: Report Service
+        connector: ninjaone
+        operation: get_device_windows_services
+        config: ""
+        params:
+          device_id: "{{ vars.input.params.device_id }}"
+          name: "{{ vars.input.params.service_name }}"
+
+      - name: Report Service
+        type: set_variable
+        vars:
+          state_before: "{{ vars.steps.Read_Service_State[0].state | default('unknown') }}"
+          state_after: "{{ vars.steps.Verify_Service_State[0].state | default('unknown') }}"
+          running: "{{ vars.steps.Verify_Service_State[0].state | default('') == 'RUNNING' }}"

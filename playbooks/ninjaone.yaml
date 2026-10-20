@@ -42,7 +42,6 @@ playbooks:
         requires_record: false
         inputVariables:
           - {name: hostname}
-          - {name: hostname}
         next: Find Device
 
       - name: Find Device
@@ -126,7 +125,6 @@ playbooks:
         requires_record: false
         inputVariables:
           - {name: product}
-          - {name: product}
         next: Search Installed Software
 
       - name: Search Installed Software
@@ -207,7 +205,6 @@ playbooks:
         module: assets
         requires_record: false
         inputVariables:
-          - {name: device_id}
           - {name: device_id}
         next: List Pending OS Patches
 
@@ -334,7 +331,6 @@ playbooks:
         requires_record: false
         inputVariables:
           - {name: device_id}
-          - {name: device_id}
         next: Get Endpoint
 
       - name: Get Endpoint
@@ -434,8 +430,6 @@ playbooks:
         module: assets
         requires_record: false
         inputVariables:
-          - {name: device_id}
-          - {name: service_name}
           - {name: device_id}
           - {name: service_name}
         next: Read Service State

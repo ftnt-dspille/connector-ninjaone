@@ -27,7 +27,7 @@
             "hostname"
           ],
           "synchronous": false,
-          "lastModifyDate": 1792505497,
+          "lastModifyDate": 1792509976,
           "collection": "/api/3/workflow_collections/5f1a009c-081c-5a54-8929-c68b24bd1eb5",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/c7f12810-be7b-5341-a589-abaf02558b32",
@@ -38,9 +38,6 @@
               "description": null,
               "arguments": {
                 "inputVariables": [
-                  {
-                    "name": "hostname"
-                  },
                   {
                     "name": "hostname"
                   }
@@ -339,7 +336,7 @@
             "product"
           ],
           "synchronous": false,
-          "lastModifyDate": 1792505497,
+          "lastModifyDate": 1792509976,
           "collection": "/api/3/workflow_collections/5f1a009c-081c-5a54-8929-c68b24bd1eb5",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/f22dbdf7-ec05-5cb9-9ca1-cd5e56a7c605",
@@ -350,9 +347,6 @@
               "description": null,
               "arguments": {
                 "inputVariables": [
-                  {
-                    "name": "product"
-                  },
                   {
                     "name": "product"
                   }
@@ -616,7 +610,7 @@
             "device_id"
           ],
           "synchronous": false,
-          "lastModifyDate": 1792505497,
+          "lastModifyDate": 1792509976,
           "collection": "/api/3/workflow_collections/5f1a009c-081c-5a54-8929-c68b24bd1eb5",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/d927a311-6e53-5c59-9f96-555cb4f99e04",
@@ -627,9 +621,6 @@
               "description": null,
               "arguments": {
                 "inputVariables": [
-                  {
-                    "name": "device_id"
-                  },
                   {
                     "name": "device_id"
                   }
@@ -1124,7 +1115,7 @@
             "device_id"
           ],
           "synchronous": false,
-          "lastModifyDate": 1792505497,
+          "lastModifyDate": 1792509976,
           "collection": "/api/3/workflow_collections/5f1a009c-081c-5a54-8929-c68b24bd1eb5",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/7767776d-af78-5756-8d9a-3b735560034f",
@@ -1135,9 +1126,6 @@
               "description": null,
               "arguments": {
                 "inputVariables": [
-                  {
-                    "name": "device_id"
-                  },
                   {
                     "name": "device_id"
                   }
@@ -1533,7 +1521,7 @@
             "service_name"
           ],
           "synchronous": false,
-          "lastModifyDate": 1792505497,
+          "lastModifyDate": 1792509976,
           "collection": "/api/3/workflow_collections/5f1a009c-081c-5a54-8929-c68b24bd1eb5",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/a6200c72-e883-598b-b5f1-3fd26db6a531",
@@ -1544,12 +1532,6 @@
               "description": null,
               "arguments": {
                 "inputVariables": [
-                  {
-                    "name": "device_id"
-                  },
-                  {
-                    "name": "service_name"
-                  },
                   {
                     "name": "device_id"
                   },
